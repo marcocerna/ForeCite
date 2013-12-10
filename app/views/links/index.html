@@ -1,0 +1,32 @@
+<div ng-controller="LinksController">
+
+<h1>External Links for {{searchQuery}} </h1>
+
+<input id="search-query" type="text" placeholder="Enter Search Query" ng-model="searchQuery">
+<button ng-click="getCategories()">Get Categories</button>
+<button ng-click="getExternalLinks()">Get External Links</button>
+
+<br>
+<div id="left">
+  Categories:
+  <ul>
+    <li ng-repeat="link in links"> {{link["title"]}} <button ng-click="getSubcategories(link['title'])">Show</button>
+    </li>
+  </ul>
+
+  External Links:
+  <ul>
+    <li ng-repeat="link in links">{{link["*"]}} </li>
+  </ul>
+</div>
+
+
+<div id="right">
+  <ul>
+    <li ng-repeat="sublink in sublinks"> {{sublink["title"]}} </li>
+  </ul>
+</div>
+
+
+</div>
+

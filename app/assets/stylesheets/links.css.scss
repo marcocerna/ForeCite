@@ -1,0 +1,21 @@
+// Place all the styles related to the Links controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#search-query {
+  width: 200px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#left {
+  width: 40%;
+  float: left;
+}
+
+#right {
+  width: 40%;
+  float: right;
+}

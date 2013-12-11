@@ -1,29 +1,40 @@
 <div ng-controller="LinksController">
 
-<h1>External Links for {{searchQuery}} </h1>
+<div id="header">
+  <a href="#"><h1 id="forecite-logo">ForeCite</h1></a>
 
-<input id="search-query" type="text" placeholder="Enter Search Query" ng-model="searchQuery">
-<button ng-click="getCategories()">Get Categories</button>
-<button ng-click="getExternalLinks()">Get External Links</button>
+  <input id="search-query" type="text" placeholder="Enter Search Query" ng-model="searchQuery">
+  <button id="cats-button" ng-click="getCategories()">Get Categories</button>
+  <button id="extlinks-button" ng-click="getExternalLinks()">Get External Links</button>
+</div>
 
 <br>
+
+<div id="current-search">
+  <h2>Currently searching for: {{searchQuery}} </h2>
+</div>
+
+
 <div id="left">
-  Categories:
+  <p>Categories:</p>
   <ul>
-    <li ng-repeat="link in links"> {{link["title"]}} <button ng-click="getSubcategories(link['title'])">Show</button>
+    <li class="left-list-element list-element" ng-repeat="cat in cats"> {{cat["title"]}}
+    <button class="show-button" ng-click="getSubcategories('Category:' + cat['title'])">Show</button>
     </li>
   </ul>
 
-  External Links:
   <ul>
     <li ng-repeat="link in links">{{link["*"]}} </li>
   </ul>
 </div>
 
 
+
+
 <div id="right">
+  <p>Subcategories:</p>
   <ul>
-    <li ng-repeat="sublink in sublinks"> {{sublink["title"]}} </li>
+    <li class="right-list-element list-element" ng-repeat="sublink in sublinks"> {{sublink["title"]}} </li>
   </ul>
 </div>
 

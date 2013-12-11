@@ -38,6 +38,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    d3-rails (3.3.7)
+      railties (>= 3.1)
     erubis (2.7.0)
     execjs (2.0.2)
     hike (1.2.3)
@@ -52,7 +54,10 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.1)
     mime-types (1.25.1)
+    mocha (0.14.0)
+      metaclass (~> 0.0.1)
     multi_json (1.8.2)
     pg (0.17.0)
     polyglot (0.3.3)
@@ -112,8 +117,10 @@ PLATFORMS
 DEPENDENCIES
   angularjs-rails
   coffee-rails (~> 3.2.1)
+  d3-rails (~> 3.3.7)
   jquery-rails
   lodash-rails
+  mocha
   pg
   rails (= 3.2.14)
   rails_12factor

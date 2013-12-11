@@ -8,6 +8,7 @@ gem 'rails', '3.2.14'
 # gem 'sqlite3'
 gem 'pg'
 gem 'rails_12factor'
+gem "d3-rails", "~> 3.3.7"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -21,6 +22,10 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'angularjs-rails'
   gem 'lodash-rails'
+end
+
+group :test do
+  gem "mocha", require: false
 end
 
 gem 'jquery-rails'

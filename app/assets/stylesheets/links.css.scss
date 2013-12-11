@@ -2,20 +2,119 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#search-query {
-  width: 200px;
+body {
+  font-family: Raleway;
 }
+
+button {
+  cursor: pointer;
+  border-radius: 1px;
+}
+
+li:hover {
+  background-color: #bdc3c7;
+  color: white;
+}
+
+// Div styles
+
+#left {
+  width: 45%;
+  float: left;
+}
+
+#right {
+  width: 45%;
+  float: right;
+}
+
+#current-search {
+  text-align: center;
+}
+
+#header {
+  text-align: center;
+  background-image: url(brushed.png);
+  background-repeat: repeat-2;
+  margin: -8px;
+  padding: 10px;
+}
+
+
+// Header element styles
+
+#forecite-logo {
+  color: #34495e;
+  text-shadow: 2px 2px #bdc3c7;
+  width: 200px;
+  float: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#search-query {
+  width: 600px;
+  font-size: 18px;
+  border: 1px solid grey;
+  padding: 5px;
+  margin: 10px;
+}
+
+button#cats-button {
+  font-size: 18px;
+  border: 0px;
+  background-color: #44a0de;
+  color: white;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+button#cats-button:hover {
+  background-color: #2980b9
+}
+
+button#extlinks-button {
+  font-size: 18px;
+  border: 0px;
+  background-color: #44a0de;
+  color: white;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+button#extlinks-button:hover {
+  background-color: #2980b9
+}
+
+
+// List styles
 
 ul {
   list-style-type: none;
 }
 
-#left {
-  width: 40%;
-  float: left;
+.list-element {
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 5px;
+  margin: 10px;
 }
 
-#right {
-  width: 40%;
-  float: right;
+button.show-button {
+  font-size: 12px;
+  border: 0px;
+  background-color: #44a0de;
+  color: white;
+}
+
+// d3 styles
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
 }

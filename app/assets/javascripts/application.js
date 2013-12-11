@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require lodash
+//= require d3
 //= require jquery
 //= require jquery_ujs
 //= require angular

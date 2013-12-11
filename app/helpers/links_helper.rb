@@ -41,6 +41,14 @@ def further_reading
     @isbns.push(isbn.delete("."))
   end
 
+
+  # Grab titles and shove them into an array
+  @titles = []
+  @books.each do |book|
+    title = book.split(").")[1].split(".")[0]
+    @titles.push(title)
+  end
+
   binding.pry
 
   # Return the correct thing for the HTML!

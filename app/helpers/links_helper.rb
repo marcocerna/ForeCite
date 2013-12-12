@@ -59,7 +59,6 @@ end
 ### Things to do ###
 
 # Move amazon methods out of model and into this file
-# Flatten amazon methods and have them be called by further_reading method (maybe?)
-# Eventually make then async calls
+
 
 end

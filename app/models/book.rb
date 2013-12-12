@@ -73,7 +73,7 @@ class Book < ActiveRecord::Base
       amazon_data[:title] = title
 
       all_books.push(amazon_data)
-      sleep(0.25)
+      sleep(0.3)
     end
 
     all_books

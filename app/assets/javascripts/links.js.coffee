@@ -2,8 +2,16 @@ app = angular.module "ForeCite", ["ngResource"]
 
 app.controller 'LinksController', ($scope, $http, $resource) ->
 
-  # Ajax call to wikipedia API for external links
+  $scope.clearButtons = ->
+    $scope.linksSelected = false
+    $scope.catsSelected = false
+    $scope.booksSelected = false
+
+
   $scope.getExternalLinks = ->
+    $scope.clearButtons()
+    $scope.linksSelected = true
+
     extlinks = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=extlinks&format=json&ellimit=200&titles=' + $scope.searchQuery + '&callback=JSON_CALLBACK'
 
     extlinks.success (data) ->
@@ -13,15 +21,20 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
       console.log 'ERROR'
 
 
-  # Ajax call to wikipedia API for categories
-  $scope.getCategories = ->
-    categories = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=40&titles=' + $scope.searchQuery + '&callback=JSON_CALLBACK'
+
+  $scope.getCategories = (query) ->
+    $scope.clearButtons()
+    $scope.catsSelected = true
+
+    categories = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + query + '&callback=JSON_CALLBACK'
 
     categories.success (data) ->
       $scope.links = null
       $scope.cats = data.query.pages[_.first _.keys data.query.pages].categories
+      $scope.searchQuery = query
+      $scope.sublinks = null
 
-      # This loop removes "Category:" from every string (added in html for the next API call)
+      # This loop removes "Category:" from every string
       for element in $scope.cats
         newThing = element.title.split(":").pop()
         element.title = newThing
@@ -31,15 +44,19 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
 
 
   $scope.getSubcategories = (category) ->
-    subcats = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&list=categorymembers&format=json&cmtitle=' + category + '&cmlimit=40&callback=JSON_CALLBACK'
+    subcats = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&list=categorymembers&format=json&cmtitle=' + category + '&cmlimit=400&callback=JSON_CALLBACK'
 
     subcats.success (data) ->
       $scope.sublinks = data.query.categorymembers
+      $scope.currentCategory = category.split(":").pop()
     .error (data) ->
       console.log 'ERROR'
 
 
   $scope.getReading = ->
+    $scope.clearButtons()
+    $scope.booksSelected = true
+
     ajaxReq = $http.get("/links/search/" + $scope.searchQuery)
 
     ajaxReq.success (data) ->
@@ -63,14 +80,7 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
 
     ajaxReq.success (data) ->
       $scope.amazons = data
-      debugger
     .error (data) ->
       console.log 'ERROR'
-
-      # Fix up controller methods to flow right
-
-
-    # ajax success -> $scope.amazon = data
-
 
 

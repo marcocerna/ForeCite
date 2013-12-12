@@ -4,9 +4,9 @@
   <a href="#"><h1 id="forecite-logo">ForeCite</h1></a>
 
   <input id="search-query" type="text" placeholder="Enter Search Query" ng-model="searchQuery">
-  <button id="cats-button" class="header-button" ng-click="getCategories()">Get Categories</button>
-  <button id="extlinks-button" class="header-button" ng-click="getExternalLinks()">Get Links</button>
-  <button id="books-button" class="header-button" ng-click="getReading()">Get Books</button>
+  <button id="cats-button"      class="header-button clicked-{{catsSelected}}"      ng-click="getCategories(searchQuery)">Get Categories</button>
+  <button id="extlinks-button"  class="header-button clicked-{{linksSelected}}"     ng-click="getExternalLinks()">Get Links</button>
+  <button id="books-button"     class="header-button clicked-{{booksSelected}}"     ng-click="getReading()">Get Books</button>
 </div>
 
 <br>
@@ -27,7 +27,7 @@
 
 
 
-  <h3>Further Reading:</h3>
+  <!-- <h3>Further Reading:</h3> -->
   <ul>
     <li class="furtherReading list-element" ng-repeat="book in books"><h5>{{book}}</h5></li>
   </ul>
@@ -38,8 +38,8 @@
 
   <p>Categories:</p>
   <ul>
-    <li class="left-list-element list-element" ng-repeat="cat in cats"> {{cat["title"]}}
-    <button class="show-button" ng-click="getSubcategories('Category:' + cat['title'])">Show</button>
+    <li class="left-list-element list-element" ng-mouseover="getSubcategories('Category:' + cat['title'])" ng-repeat="cat in cats">
+      {{cat["title"]}}
     </li>
   </ul>
 
@@ -58,9 +58,9 @@
     <img class="book-image" src="{{amazon['image']}}">
   </div>
 
-  <p>Subcategories:</p>
+  <p>Topics for {{currentCategory}}:</p>
   <ul>
-    <li class="right-list-element list-element" ng-repeat="sublink in sublinks"> {{sublink["title"]}} </li>
+    <li class="right-list-element list-element" ng-repeat="sublink in sublinks" ng-click="getCategories(sublink['title'])"> {{sublink["title"]}} </li>
   </ul>
 </div>
 

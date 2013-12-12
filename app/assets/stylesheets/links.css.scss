@@ -60,7 +60,7 @@ li:hover {
   margin: 10px;
 }
 
-button.header-button {
+.header-button {
   font-size: 18px;
   border: 0px;
   background-color: #44a0de;
@@ -71,6 +71,10 @@ button.header-button {
 
 button.header-button:hover {
   background-color: #2980b9
+}
+
+.clicked-true {
+  background-color: #e67e22;
 }
 
 
@@ -89,6 +93,18 @@ ul {
   font-family: Helvetica;
   color: #7598c9;
   cursor: pointer;
+}
+
+.list-element {
+  margin-left: -50px;
+}
+
+.left-list-element {
+  width: 300px;
+}
+
+.category-link {
+  text-decoration: none;
 }
 
 button.show-button {

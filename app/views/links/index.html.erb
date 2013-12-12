@@ -23,17 +23,17 @@
   <!-- This grabs References links -->
   <ul>
     <%# @nokoTest.each do |item| %>
-    <li class="nokoTest list-element"><%#= item %></li>
+    <!-- <li class="nokoTest list-element"><%#= item %></li> -->
     <%# end %>
   </ul>
 
 
 
   <!-- This grabs Further Reading links  -->
-  <p>Further Reading:</p>
+  <h3>Further Reading:</h3>
   <ul>
     <% @books.each do |item| %>
-    <li class="furtherReading list-element"><%= item %></li>
+    <a><li class="furtherReading list-element"><h5><%= item %></h5></li></a>
     <% end %>
   </ul>
 
@@ -59,7 +59,7 @@
 <div id="right">
 
   <% @amazon_data.each do |book| %>
-    <p>Title: <%= book[:title] %></p>
+    <h3><%= book[:title] %></h3>
     <img class="book-image" src="<%= book[:image] %>">
   <% end %>
 

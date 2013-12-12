@@ -38,4 +38,3 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
     .error (data) ->
       console.log 'ERROR'
 
-# wikiTest = Nokogiri::HTML(open("http://en.wikipedia.org/wiki/JavaScript"))

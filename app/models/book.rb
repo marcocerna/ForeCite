@@ -31,13 +31,9 @@ class Book < ActiveRecord::Base
 
     # Generates sha and signature (these classes? are built into Ruby or maybe Rails)
     sha256 = OpenSSL::Digest::SHA256.new
-
-
     sig = OpenSSL::HMAC.digest(sha256, secret_key, data)
     signature = Base64.encode64(sig)
-
     signature_hash = { "Signature" => signature }
-
     request_url = "http://webservices.amazon.com/onca/xml?"
 
     # This is the final thing we're gonna need for the API request

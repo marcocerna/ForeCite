@@ -12,6 +12,8 @@
 
 <div id="current-search">
   <h2>Currently searching for: {{searchQuery}} </h2>
+
+  <!-- <img src="<%= @image %>"> -->
 </div>
 
 
@@ -54,6 +56,11 @@
 
 
 <div id="right">
+
+  <p>Title: <%= @title %></p>
+  <p>Image URL: <%= @image %></p>
+
+
   <p>Subcategories:</p>
   <ul>
     <li class="right-list-element list-element" ng-repeat="sublink in sublinks"> {{sublink["title"]}} </li>

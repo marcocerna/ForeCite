@@ -49,7 +49,6 @@ def further_reading
     @titles.push(title)
   end
 
-  binding.pry
 
   # Return the correct thing for the HTML!
   @books

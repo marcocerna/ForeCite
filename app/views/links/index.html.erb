@@ -4,8 +4,9 @@
   <a href="#"><h1 id="forecite-logo">ForeCite</h1></a>
 
   <input id="search-query" type="text" placeholder="Enter Search Query" ng-model="searchQuery">
-  <button id="cats-button" ng-click="getCategories()">Get Categories</button>
-  <button id="extlinks-button" ng-click="getExternalLinks()">Get External Links</button>
+  <button id="cats-button" class="header-button" ng-click="getCategories()">Get Categories</button>
+  <button id="extlinks-button" class="header-button" ng-click="getExternalLinks()">Get Links</button>
+  <button id="books-button" class="header-button">Get Books</button>
 </div>
 
 <br>
@@ -57,10 +58,10 @@
 
 <div id="right">
 
-  <p>Title: <%= @title %></p>
-  <p>Image URL: <%= @image %></p>
-  <img class="book-image" src="<%= @image %>">
-
+  <% @amazon_data.each do |book| %>
+    <p>Title: <%= book[:title] %></p>
+    <img class="book-image" src="<%= book[:image] %>">
+  <% end %>
 
   <p>Subcategories:</p>
   <ul>

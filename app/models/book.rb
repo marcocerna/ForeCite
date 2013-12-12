@@ -58,16 +58,24 @@ class Book < ActiveRecord::Base
     request.remove_namespaces!
   end
 
-  # Grab image and title (separate methods to call them in controller more easily)
-  def get_image(number)
-    request = parse_request(number)
-    image = request.xpath("//LargeImage").text.split(".jpg")[0] + ".jpg"
-  end
 
-  def get_title(number)
-    request = parse_request(number)
-    title = request.xpath("//Title").text
-  end
+  # This will let us grab multiple ISBNs and run API calls on all of them
+  def batch_requests(array)
+    all_books = []
 
+    array.each do |isbn|
+      amazon_data = {}
+      request = parse_request(isbn)
+      image = request.xpath("//LargeImage").text.split(".jpg")[0] + ".jpg"
+      title = request.xpath("//Title").text
+
+      amazon_data[:image] = image
+      amazon_data[:title] = title
+
+      all_books.push(amazon_data)
+    end
+
+    all_books
+  end
 
 end

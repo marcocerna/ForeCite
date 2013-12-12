@@ -22,7 +22,6 @@ def further_reading
 
   # Grab wikipedia page from Heroku
   books_list = Nokogiri::HTML(open('http://en.wikipedia.org/wiki/JavaScript'))
-
   @books = []
 
   # Push all elements from Further Reading into array (text only)
@@ -40,7 +39,6 @@ def further_reading
     @isbns.push(isbn.delete("."))
   end
 
-
   # Grab titles and shove them into an array
   @titles = []
   @books.each do |book|
@@ -48,10 +46,15 @@ def further_reading
     @titles.push(title)
   end
 
-
   # Return the correct thing for the HTML!
   @books
 end
 
+
+### Things to do ###
+
+# Move amazon methods out of model and into this file
+# Flatten amazon methods and have them be called by further_reading method (maybe?)
+# Eventually make then async calls
 
 end

@@ -6,9 +6,8 @@ def index
   @books = further_reading
 
   @book = Book.create
-
-  @title = @book.get_title(1590591526)
-  @image = @book.get_image(1590591526)
+  @amazon_data = @book.batch_requests(["1590591526", "0789726122"])
+  # binding.pry
 
 end
 

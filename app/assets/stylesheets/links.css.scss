@@ -60,7 +60,7 @@ li:hover {
   margin: 10px;
 }
 
-button#cats-button {
+button.header-button {
   font-size: 18px;
   border: 0px;
   background-color: #44a0de;
@@ -69,22 +69,10 @@ button#cats-button {
   padding-bottom: 6px;
 }
 
-button#cats-button:hover {
+button.header-button:hover {
   background-color: #2980b9
 }
 
-button#extlinks-button {
-  font-size: 18px;
-  border: 0px;
-  background-color: #44a0de;
-  color: white;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
-button#extlinks-button:hover {
-  background-color: #2980b9
-}
 
 
 // List styles

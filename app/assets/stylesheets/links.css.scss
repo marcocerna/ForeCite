@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
-  font-family: Raleway;
+  font-family: Karla;
 }
 
 button {
@@ -37,7 +37,6 @@ li:hover {
   background-image: url(brushed.png);
   background-repeat: repeat-2;
   margin: -8px;
-  padding: 10px;
 }
 
 
@@ -50,6 +49,7 @@ li:hover {
   float: left;
   margin-top: 10px;
   margin-bottom: 10px;
+  font-family: Raleway;
 }
 
 #search-query {
@@ -95,6 +95,18 @@ button.show-button {
   font-size: 12px;
   border: 0px;
   background-color: #44a0de;
+  color: white;
+}
+
+.book-listing {
+  color: #7598c9;
+  padding: 0px 10px 10px 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.book-listing:hover {
+  background-color: #7598c9;
   color: white;
 }
 

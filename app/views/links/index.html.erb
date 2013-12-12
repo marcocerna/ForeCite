@@ -6,7 +6,7 @@
   <input id="search-query" type="text" placeholder="Enter Search Query" ng-model="searchQuery">
   <button id="cats-button" class="header-button" ng-click="getCategories()">Get Categories</button>
   <button id="extlinks-button" class="header-button" ng-click="getExternalLinks()">Get Links</button>
-  <button id="books-button" class="header-button">Get Books</button>
+  <button id="books-button" class="header-button" ng-click="getReading()">Get Books</button>
 </div>
 
 <br>
@@ -33,7 +33,7 @@
   <h3>Further Reading:</h3>
   <ul>
     <% @books.each do |item| %>
-    <a><li class="furtherReading list-element"><h5><%= item %></h5></li></a>
+    <li class="furtherReading list-element"><h5><%= item %></h5></li>
     <% end %>
   </ul>
 
@@ -59,8 +59,10 @@
 <div id="right">
 
   <% @amazon_data.each do |book| %>
-    <h3><%= book[:title] %></h3>
-    <img class="book-image" src="<%= book[:image] %>">
+    <div class="book-listing">
+      <h3><%= book[:title] %></h3>
+      <img class="book-image" src="<%= book[:image] %>">
+    </div>
   <% end %>
 
   <p>Subcategories:</p>

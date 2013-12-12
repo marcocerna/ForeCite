@@ -38,3 +38,9 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
     .error (data) ->
       console.log 'ERROR'
 
+  $scope.getReading = ->
+    # Grab $scope.searchQuery
+    # Pass it into the helper
+    # Execute the furtherReading method
+    # Grab the resulting data and pass it into the view
+    # Delete the old method of returning that data

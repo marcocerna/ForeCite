@@ -53,12 +53,10 @@
 
 <div id="right">
 
-  <% @amazon_data.each do |book| %>
-    <div class="book-listing">
-      <h3><%= book[:title] %></h3>
-      <img class="book-image" src="<%= book[:image] %>">
-    </div>
-  <% end %>
+  <div class="book-listing" ng-repeat="amazon in amazons">
+    <h3>{{amazon["title"]}}</h3>
+    <img class="book-image" src="{{amazon['image']}}">
+  </div>
 
   <p>Subcategories:</p>
   <ul>

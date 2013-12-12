@@ -3,8 +3,6 @@ include LinksHelper
 
 def index
   @nokoTest = nokoTest
-  @book = Book.create
-  @amazon_data = @book.batch_requests(["1590591526", "0789726122"])
 end
 
 # This is called from Angular getReading function
@@ -14,5 +12,11 @@ def search
   render json: @books
 end
 
+def products
+  @book = Book.create
+  @amazon_data = @book.batch_requests(params[:q].split("-"))
+
+  render json: @amazon_data
+end
 
 end

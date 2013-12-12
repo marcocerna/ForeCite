@@ -56,11 +56,17 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
     for book in books_array
       isbn = book.split("ISBN")[1].replace("-", "").replace("-", "").replace("-", "").replace(".", "")
       isbns.push($.trim(isbn))
-    debugger
-
 
     # Ajax call to "/links/products/" + isbn_array
-      # Can I pass an array as a params?
+    isbn_string = isbns.join("-")
+    ajaxReq = $http.get("/links/products/" + isbn_string)
+
+    ajaxReq.success (data) ->
+      $scope.amazons = data
+      debugger
+    .error (data) ->
+      console.log 'ERROR'
+
       # Fix up controller methods to flow right
 
 

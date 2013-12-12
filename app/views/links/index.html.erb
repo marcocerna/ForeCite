@@ -13,8 +13,6 @@
 
 <div id="current-search">
   <h2>Currently searching for: {{searchQuery}} </h2>
-
-  <!-- <img src="<%= @image %>"> -->
 </div>
 
 
@@ -29,12 +27,9 @@
 
 
 
-  <!-- This grabs Further Reading links  -->
   <h3>Further Reading:</h3>
   <ul>
-    <% @books.each do |item| %>
-    <li class="furtherReading list-element"><h5><%= item %></h5></li>
-    <% end %>
+    <li class="furtherReading list-element" ng-repeat="book in books"><h5>{{book}}</h5></li>
   </ul>
 
 

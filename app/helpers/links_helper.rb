@@ -18,10 +18,10 @@ end
 
 
 
-def further_reading
+def further_reading(query)
 
   # Grab wikipedia page from Heroku
-  books_list = Nokogiri::HTML(open('http://en.wikipedia.org/wiki/JavaScript'))
+  books_list = Nokogiri::HTML(open('http://en.wikipedia.org/wiki/' + query))
   @books = []
 
   # Push all elements from Further Reading into array (text only)
@@ -31,13 +31,6 @@ def further_reading
 
   # Remove empty strings so we don't get extra 'li' elements
   @books.delete("\n")
-
-  # Grab ISBNs and shove them into an array
-  @isbns = []
-  @books.each do |book|
-    isbn = book.split("ISBN")[1]
-    @isbns.push(isbn.delete("."))
-  end
 
   # Grab titles and shove them into an array
   @titles = []
@@ -50,6 +43,18 @@ def further_reading
   @books
 end
 
+
+def get_isbns(books)
+
+  # Grab ISBNs and shove them into an array
+  @isbns = []
+  @books.each do |book|
+    isbn = book.split("ISBN")[1]
+    @isbns.push(isbn.delete("."))
+  end
+
+  @isbns
+end
 
 ### Things to do ###
 

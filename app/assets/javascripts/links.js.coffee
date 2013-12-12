@@ -38,9 +38,33 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
     .error (data) ->
       console.log 'ERROR'
 
+
   $scope.getReading = ->
-    # Grab $scope.searchQuery
-    # Pass it into the helper
-    # Execute the furtherReading method
-    # Grab the resulting data and pass it into the view
-    # Delete the old method of returning that data
+    ajaxReq = $http.get("/links/search/" + $scope.searchQuery)
+
+    ajaxReq.success (data) ->
+      $scope.books = data
+      $scope.getAmazon(data)
+    .error (data) ->
+      console.log 'ERROR'
+
+
+  $scope.getAmazon = (books_array) ->
+
+    # Convert books_array into isbn_array
+    isbns = []
+    for book in books_array
+      isbn = book.split("ISBN")[1].replace("-", "").replace("-", "").replace("-", "").replace(".", "")
+      isbns.push($.trim(isbn))
+    debugger
+
+
+    # Ajax call to "/links/products/" + isbn_array
+      # Can I pass an array as a params?
+      # Fix up controller methods to flow right
+
+
+    # ajax success -> $scope.amazon = data
+
+
+

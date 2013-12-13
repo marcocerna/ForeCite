@@ -114,11 +114,19 @@ button.show-button {
   color: white;
 }
 
+// Book styles
+
 .book-listing {
   color: #7598c9;
   padding: 0px 10px 10px 10px;
   text-align: center;
   cursor: pointer;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.hide {
+  display: none;
 }
 
 .book-listing:hover {
@@ -129,6 +137,25 @@ button.show-button {
 img.book-image {
   max-width: 200px;
   max-height: 200px;
+}
+
+.temp-book-class {
+  float: left;
+  margin: 15px;
+  padding: 10px
+}
+
+#loading-books {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin: 50px;
+}
+
+#loading-books-button {
+  color: #44a0de;
+  background-color: white;
+
 }
 
 // d3 styles

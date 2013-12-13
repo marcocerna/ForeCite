@@ -62,10 +62,16 @@ class Book < ActiveRecord::Base
   # This will let us grab multiple ISBNs and run API calls on all of them
   def batch_requests(array)
     all_books = []
+    count = 0
 
     array.each do |isbn|
+      return all_books if count == 5
+
       amazon_data = {}
       request = parse_request(isbn)
+
+      # Check for throttle
+        # if so, log an error
       image = request.xpath("//LargeImage").text.split(".jpg")[0] + ".jpg"
       title = request.xpath("//Title").text
 
@@ -73,7 +79,10 @@ class Book < ActiveRecord::Base
       amazon_data[:title] = title
 
       all_books.push(amazon_data)
-      sleep(0.3)
+
+
+      sleep(1)
+      count += 1
     end
 
     all_books

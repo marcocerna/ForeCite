@@ -2,6 +2,17 @@ app = angular.module "ForeCite", ["ngResource"]
 
 app.controller 'LinksController', ($scope, $http, $resource) ->
 
+  $scope.hideLoadingBooks = "hide"
+
+  $scope.clearAll = ->
+    $scope.searchQuery = null
+
+  # $scope.clearBooks = ->
+  #   $scope.currentBookTitle = ""
+  #   $scope.amazon = ""
+  #   $('.book-image').detach()
+  #   $('.list-element').detach()
+
   $scope.clearButtons = ->
     $scope.linksSelected = false
     $scope.catsSelected = false
@@ -10,6 +21,8 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
 
   $scope.getExternalLinks = ->
     $scope.clearButtons()
+    $scope.hideBooks = "hide"
+    $scope.currentBookTitle = ""
     $scope.linksSelected = true
 
     extlinks = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=extlinks&format=json&ellimit=200&titles=' + $scope.searchQuery + '&callback=JSON_CALLBACK'
@@ -23,7 +36,10 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
 
 
   $scope.getCategories = (query) ->
+    # $scope.clearBooks()
     $scope.clearButtons()
+    $scope.hideBooks = "hide"
+    $scope.currentBookTitle = ""
     $scope.catsSelected = true
 
     categories = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + query + '&callback=JSON_CALLBACK'
@@ -55,7 +71,9 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
 
   $scope.getReading = ->
     $scope.clearButtons()
-    $scope.booksSelected = true
+    $scope.booksSelected = false
+    $scope.hideBooks = ""
+    $scope.hideLoadingBooks = ""
 
     ajaxReq = $http.get("/links/search/" + $scope.searchQuery)
 
@@ -80,7 +98,11 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
 
     ajaxReq.success (data) ->
       $scope.amazons = data
+      $scope.booksSelected = true
+      $scope.hideLoadingBooks = "hide"
     .error (data) ->
       console.log 'ERROR'
 
+  $scope.showBookTitle = (title) ->
+    $scope.currentBookTitle = title
 

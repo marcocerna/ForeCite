@@ -1,10 +1,10 @@
 <div ng-controller="LinksController">
 
 <div id="header">
-  <a href="#"><h1 id="forecite-logo">ForeCite</h1></a>
+  <a href="#"><h1 id="forecite-logo" ng-click="clearAll">ForeCite</h1></a>
 
   <input id="search-query" type="text" placeholder="Enter Search Query" ng-model="searchQuery">
-  <button id="cats-button"      class="header-button clicked-{{catsSelected}}"      ng-click="getCategories(searchQuery)">Get Categories</button>
+  <button id="cats-button"      class="header-button clicked-{{catsSelected}}"  ng-click="getCategories(searchQuery)">Get Categories</button>
   <button id="extlinks-button"  class="header-button clicked-{{linksSelected}}"     ng-click="getExternalLinks()">Get Links</button>
   <button id="books-button"     class="header-button clicked-{{booksSelected}}"     ng-click="getReading()">Get Books</button>
 </div>
@@ -13,6 +13,17 @@
 
 <div id="current-search">
   <h2>Currently searching for: {{searchQuery}} </h2>
+  <h3>{{currentBookTitle}}</h3>
+</div>
+
+<div id="loading-books" class="{{hideLoadingBooks}}">
+  <button id="loading-books-button" class="header-button">Loading Books, Please Wait</button>
+</div>
+
+<div id="books-display" class="{{hideBooks}}">
+  <div class="book-listing temp-book-class" ng-mouseover="showBookTitle(amazon['title'])" ng-repeat="amazon in amazons">
+    <img class="book-image" src="{{amazon['image']}}">
+  </div>
 </div>
 
 
@@ -53,10 +64,6 @@
 
 <div id="right">
 
-  <div class="book-listing" ng-repeat="amazon in amazons">
-    <h3>{{amazon["title"]}}</h3>
-    <img class="book-image" src="{{amazon['image']}}">
-  </div>
 
   <p>Topics for {{currentCategory}}:</p>
   <ul>

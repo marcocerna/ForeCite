@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
 include LinksHelper
-include Tasks::Yahoo        # This is where the problems lie
+include Yahoo        # This is where the problems lie
 
 def index
   # @nokoTest = nokoTest
@@ -19,7 +19,6 @@ def products
 end
 
 def boss
-  binding.pry
   @results = boss_call(params[:q])
   render json: @results
 end

@@ -26,7 +26,7 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
   $scope.getValidQuery = (query) ->
     # Grab searchQuery
     # Run it through boss_call via ajax
-    debugger
+    alert "Now making an ajax call to /links/boss"
     ajaxReq = $http.get("/links/boss/" + query)
     # Wire up the controller action
 

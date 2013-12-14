@@ -17,6 +17,12 @@
   <h3>{{currentBookTitle}}</h3>
 </div>
 
+<div id="searchResults" style="text-align: center">
+  <ul>
+    <li class="list-search-query" ng-repeat="query in validQueries">{{query}}</li>
+  </ul>
+</div>
+
 <div id="loading-books" class="{{hideLoadingBooks}}">
   <button id="loading-books-button" class="header-button">Loading Books, Please Wait</button>
 </div>
@@ -37,16 +43,10 @@
     <%# end %>
   </ul>
 
-
-
   <!-- <h3>Further Reading:</h3> -->
   <ul>
     <li class="furtherReading list-element" ng-repeat="book in books"><h5>{{book}}</h5></li>
   </ul>
-
-
-
-
 
   <p class="category-header">Categories:</p>
   <ul>
@@ -61,10 +61,7 @@
 </div>
 
 
-
-
 <div id="right">
-
 
   <p class="category-header">Topics for {{currentCategory}}:</p>
   <ul>

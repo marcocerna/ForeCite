@@ -37,6 +37,9 @@ li:hover {
   background-image: url(brushed.png);
   background-repeat: repeat-2;
   margin: -8px;
+  position: fixed;
+  width: 100%;
+  clear: both;
 }
 
 
@@ -87,7 +90,7 @@ ul {
 
 .list-element {
   background-color: #e0e0e0;
-  border-radius: 2px;
+  // border-radius: 2px;
   padding: 5px 15px 5px 15px;
   margin: 0px 10px 0px 10px;
   font-family: Helvetica;

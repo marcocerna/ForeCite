@@ -1,8 +1,9 @@
 class LinksController < ApplicationController
 include LinksHelper
+include Tasks::Yahoo        # This is where the problems lie
 
 def index
-  @nokoTest = nokoTest
+  # @nokoTest = nokoTest
 end
 
 # This is called from Angular getReading function
@@ -15,6 +16,12 @@ def products
   @book = Book.create
   @amazon_data = @book.batch_requests(params[:q].split("-"))
   render json: @amazon_data
+end
+
+def boss
+  binding.pry
+  @results = boss_call(params[:q])
+  render json: @results
 end
 
 end

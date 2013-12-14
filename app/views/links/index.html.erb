@@ -3,13 +3,14 @@
 <div id="header">
   <a href="#"><h1 id="forecite-logo" ng-click="clearAll">ForeCite</h1></a>
 
-  <input id="search-query" type="text" placeholder="Enter Search Query" ng-model="searchQuery">
-  <button id="cats-button"      class="header-button clicked-{{catsSelected}}"  ng-click="getCategories(searchQuery)">Get Categories</button>
-  <button id="extlinks-button"  class="header-button clicked-{{linksSelected}}"     ng-click="getExternalLinks()">Get Links</button>
-  <button id="books-button"     class="header-button clicked-{{booksSelected}}"     ng-click="getReading()">Get Books</button>
+  <input  id="search-query" type="text" placeholder="Enter Search Query"    ng-model="searchQuery">
+  <button id="cats-button"  class="header-button clicked-{{catsSelected}}"  ng-click="getValidQuery(searchQuery)">Get Categories</button>
+  <button id="links-button" class="header-button clicked-{{linksSelected}}" ng-click="getLinks()">Get Links</button>
+  <button id="books-button" class="header-button clicked-{{booksSelected}}" ng-click="getBooks()">Get Books</button>
 </div>
 
-<br>
+
+<div id="clear-header" style="height: 50px"></div>
 
 <div id="current-search">
   <h2>Currently searching for: {{searchQuery}} </h2>
@@ -47,9 +48,9 @@
 
 
 
-  <p>Categories:</p>
+  <p class="category-header">Categories:</p>
   <ul>
-    <li class="left-list-element list-element" ng-mouseover="getSubcategories('Category:' + cat['title'])" ng-repeat="cat in cats">
+    <li class="left-list-element list-element" ng-mouseover="getTopics('Category:' + cat['title'])" ng-repeat="cat in cats">
       {{cat["title"]}}
     </li>
   </ul>
@@ -65,9 +66,9 @@
 <div id="right">
 
 
-  <p>Topics for {{currentCategory}}:</p>
+  <p class="category-header">Topics for {{currentCategory}}:</p>
   <ul>
-    <li class="right-list-element list-element" ng-repeat="sublink in sublinks" ng-click="getCategories(sublink['title'])"> {{sublink["title"]}} </li>
+    <li class="right-list-element list-element" ng-repeat="topic in topics" ng-click="getCategories(topic['title'])"> {{topic["title"]}} </li>
   </ul>
 </div>
 

@@ -71,6 +71,7 @@ GEM
     multi_json (1.8.2)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    oauth (0.4.7)
     pg (0.17.0)
     polyglot (0.3.3)
     pry (0.9.12.3)
@@ -144,6 +145,7 @@ DEPENDENCIES
   lodash-rails
   mocha
   nokogiri
+  oauth
   pg
   pry-rails
   rails (= 3.2.14)

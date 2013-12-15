@@ -32,6 +32,22 @@ li:hover {
   text-align: center;
 }
 
+#search-results {
+  text-align: center;
+}
+
+#what-are-you-looking-for {
+  text-align: center;
+}
+
+.center-text {
+  text-align: center;
+}
+
+#search-results-list {
+  padding-left: 0px;
+}
+
 #header {
   text-align: center;
   background-image: url(brushed.png);
@@ -121,6 +137,7 @@ button.show-button {
   width: 400px;
   margin-left: auto;
   margin-right: auto;
+  cursor: pointer;
 }
 
 // Book styles
@@ -166,6 +183,13 @@ img.book-image {
   background-color: white;
 
 }
+
+// Other stuff
+
+.hide-until-search {
+  display:none
+}
+
 
 // d3 styles
 

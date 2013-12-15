@@ -4,22 +4,23 @@
   <a href="#"><h1 id="forecite-logo" ng-click="clearAll">ForeCite</h1></a>
 
   <input  id="search-query" type="text" placeholder="Enter Search Query"    ng-model="searchQuery">
-  <button id="cats-button"  class="header-button clicked-{{catsSelected}}"  ng-click="getValidQuery(searchQuery)">Get Categories</button>
-  <button id="links-button" class="header-button clicked-{{linksSelected}}" ng-click="getLinks()">Get Links</button>
-  <button id="books-button" class="header-button clicked-{{booksSelected}}" ng-click="getBooks()">Get Books</button>
+  <button id="cats-button"  class="header-button clicked-{{catsSelected}}"  ng-click="getValidQuery(searchQuery, 'categories')">Get Categories</button>
+  <button id="links-button" class="header-button clicked-{{linksSelected}}" ng-click="getValidQuery(searchQuery, 'links')">Get Links</button>
+  <button id="books-button" class="header-button clicked-{{booksSelected}}" ng-click="getValidQuery(searchQuery, 'books')">Get Books</button>
 </div>
 
 
 <div id="clear-header" style="height: 50px"></div>
 
-<div id="current-search">
+<div id="current-search" class="center-text">
   <h2>Currently searching for: {{searchQuery}} </h2>
   <h3>{{currentBookTitle}}</h3>
 </div>
 
-<div id="searchResults" style="text-align: center">
-  <ul>
-    <li class="list-search-query" ng-repeat="query in validQueries">{{query}}</li>
+<div id="searchResults" class="center-text {{hideUntilSearch}}">
+  <h3 id="what-are-you-looking-for" class="center-text">What are you looking for? (Click one)</h3>
+  <ul id="search-results-list" class='center-text'>
+    <li class="list-search-query" ng-repeat="query in validQueries" ng-click="executeButton(query)">{{query}}</li>
   </ul>
 </div>
 

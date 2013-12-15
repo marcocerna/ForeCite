@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
 include LinksHelper
-include Yahoo        # This is where the problems lie
+include Yahoo
 
 def index
   # @nokoTest = nokoTest

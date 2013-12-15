@@ -51,9 +51,9 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
 
   $scope.executeButton = (query) ->
     $scope.searchQuery = query
-    $scope.getLinks()      if $scope.buttonSelected == "links"
-    $scope.getCategories() if $scope.buttonSelected == "categories"
-    $scope.getBooks()      if $scope.buttonSelected == "books"
+    $scope.getLinks()                         if $scope.buttonSelected == "links"
+    $scope.getCategories($scope.searchQuery)  if $scope.buttonSelected == "categories"
+    $scope.getBooks()                         if $scope.buttonSelected == "books"
 
   ################
   # Links button #
@@ -77,17 +77,18 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
   # Categories button (2 functions) #
   ###################################
 
-  $scope.getCategories = ->
+  $scope.getCategories = (query) ->
+    console.log "Getting categories for" + query
     $scope.clearButtons()
     $scope.clearLinks()
     $scope.clearBooks()
     $scope.catsSelected = true
 
-    categories = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + $scope.searchQuery + '&callback=JSON_CALLBACK'
+    categories = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + (query) + '&callback=JSON_CALLBACK'
 
     categories.success (data) ->
       $scope.cats = data.query.pages[_.first _.keys data.query.pages].categories
-      # $scope.searchQuery = query
+      $scope.searchQuery = query
       $scope.hideUntilSearch = "hide"
 
       # This loop removes "Category:" from every string
@@ -99,6 +100,7 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
       console.log 'ERROR: getCategories'
 
   $scope.getTopics = (category) ->
+    console.log "Getting topics for " + category
     subcats = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&list=categorymembers&format=json&cmtitle=' + category + '&cmlimit=400&callback=JSON_CALLBACK'
 
     subcats.success (data) ->
@@ -128,6 +130,8 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
 
   $scope.getAmazon = (books_array) ->
 
+    console.log "Beginning getAmazon function"    ####################
+
     # Convert books_array into isbn_array
     isbns = []
     for book in books_array
@@ -136,6 +140,7 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
 
     # Ajax call to "/links/products/" + isbn_array
     isbn_string = isbns.join("-")
+    console.log "About to make ajax call to /products"          ###################
     ajaxReq = $http.get("/links/products/" + isbn_string)
 
     ajaxReq.success (data) ->

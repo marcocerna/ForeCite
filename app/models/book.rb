@@ -8,9 +8,10 @@ class Book < ActiveRecord::Base
 
   def amazon_request(number)
 
+    puts "Amazon request method has fired"
     # Sets up params hash with ISBN and all the other stuff Amazon needs
     current_time = DateTime.now.utc.strftime("%FT%TZ")
-    isbn = number
+    isbn = number.gsub(/[^0-9]/, "")
     params = {
             "Service" => "AWSECommerceService",
             "AWSAccessKeyId" => ENV['AMAZON_KEY'],
@@ -39,9 +40,16 @@ class Book < ActiveRecord::Base
     # This is the final thing we're gonna need for the API request
     formatted_request = request_url + params.to_query + "&" + signature_hash.to_query.chomp.gsub(/%0A/,'')
 
+
+    puts "Here is the formatted_request: "
+    p formatted_request
+    binding.pry
+
     # Typhoeus request
     request = Typhoeus.get(formatted_request).body
+    puts "Amazon request method has completed"
     p request
+
 
   end
 
@@ -54,13 +62,18 @@ class Book < ActiveRecord::Base
 
   # Now that we've run the request, we have Nokogiri parse the amazon data into an XML object
   def parse_request(number)
+    puts "Parse request method has fired"
     request = Nokogiri::XML(amazon_request(number))
+    puts "Parse request method has completed"
+
     request.remove_namespaces!
+
   end
 
 
   # This will let us grab multiple ISBNs and run API calls on all of them
   def batch_requests(array)
+    puts "Batch requests method has fired"
     all_books = []
     count = 0
 
@@ -85,6 +98,7 @@ class Book < ActiveRecord::Base
       count += 1
     end
 
+    puts "Batch requests method has completed"
     all_books
   end
 

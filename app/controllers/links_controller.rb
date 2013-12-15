@@ -13,6 +13,7 @@ def search
 end
 
 def products
+  puts "Products action has fired"
   @book = Book.create
   @amazon_data = @book.batch_requests(params[:q].split("-"))
   render json: @amazon_data

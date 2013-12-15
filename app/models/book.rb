@@ -86,9 +86,11 @@ class Book < ActiveRecord::Base
         # if so, log an error
       image = request.xpath("//LargeImage").text.split(".jpg")[0] + ".jpg"
       title = request.xpath("//Title").text
+      link = request.xpath("//ItemLink").first.children.last.text
 
       amazon_data[:image] = image
       amazon_data[:title] = title
+      amazon_data[:link] = link
 
       all_books.push(amazon_data)
 

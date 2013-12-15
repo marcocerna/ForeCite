@@ -69,8 +69,13 @@
     <li class="right-list-element list-element" ng-repeat="topic in topics" ng-click="getCategories(topic['title'])"> {{topic["title"]}} </li>
   </ul>
 
-  <h3>{{currentWikiBook[0]['title']}}</h3>
-  <img src="{{currentWikiBook[0]['image']}}">
+  <a href={{currentWikiBook[0]["link"]}} target="_blank">
+    <div class="current-wiki-book book-listing">
+      <h3>{{currentWikiBook[0]['title']}}</h3>
+      <img src="{{currentWikiBook[0]['image']}}">
+    </div>
+  </a>
+
 </div>
 
 

@@ -43,7 +43,6 @@ class Book < ActiveRecord::Base
 
     puts "Here is the formatted_request: "
     p formatted_request
-    binding.pry
 
     # Typhoeus request
     request = Typhoeus.get(formatted_request).body

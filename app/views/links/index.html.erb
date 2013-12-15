@@ -46,7 +46,7 @@
 
   <!-- <h3>Further Reading:</h3> -->
   <ul>
-    <li class="furtherReading list-element" ng-repeat="book in books"><h5>{{book}}</h5></li>
+    <li class="furtherReading list-element" ng-repeat="book in books" ng-click="getAmazon([book])"><h5>{{book}}</h5></li>
   </ul>
 
   <p class="category-header">Categories:</p>
@@ -68,6 +68,9 @@
   <ul>
     <li class="right-list-element list-element" ng-repeat="topic in topics" ng-click="getCategories(topic['title'])"> {{topic["title"]}} </li>
   </ul>
+
+  <h3>{{currentWikiBook[0]['title']}}</h3>
+  <img src="{{currentWikiBook[0]['image']}}">
 </div>
 
 

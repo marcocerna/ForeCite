@@ -131,6 +131,7 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
   $scope.getAmazon = (books_array) ->
 
     console.log "Beginning getAmazon function"    ####################
+    debugger
 
     # Convert books_array into isbn_array
     isbns = []
@@ -144,7 +145,10 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
     ajaxReq = $http.get("/links/products/" + isbn_string)
 
     ajaxReq.success (data) ->
-      $scope.amazons = data
+      # $scope.amazons = data
+      console.log "Got the Amazon book data!"
+      console.log data
+      $scope.currentWikiBook = data
       $scope.booksSelected = true
       $scope.hideLoadingBooks = "hide"
     .error (data) ->

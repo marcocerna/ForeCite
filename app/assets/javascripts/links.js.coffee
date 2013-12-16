@@ -90,6 +90,7 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
       $scope.cats = data.query.pages[_.first _.keys data.query.pages].categories
       $scope.searchQuery = query
       $scope.hideUntilSearch = "hide"
+      $scope.wikifiedQuery = "http://en.wikipedia.org/wiki/" + $scope.searchQuery.split(" ").join("_")
 
       # This loop removes "Category:" from every string
       for element in $scope.cats
@@ -169,6 +170,7 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
       console.log "amazonSearch successfully fired. Here's the data:"
       console.log data
       $scope.amazons = data
+      debugger
       $scope.hideLoadingBooks = "hide"
       $scope.hideUntilSearch = "hide"
     .error (data) ->

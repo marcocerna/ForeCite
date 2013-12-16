@@ -14,6 +14,7 @@
 
 <div id="current-search" class="center-text">
   <h2>Currently searching for: {{searchQuery}} </h2>
+  <a href="{{wikifiedQuery}}" target="_blank">Wiki Page</a>
   <h3>{{currentBookTitle}}</h3>
 </div>
 
@@ -30,7 +31,9 @@
 
 <div id="books-display" class="{{hideBooks}}">
   <div class="book-listing temp-book-class" ng-mouseover="showBookTitle(amazon['title'])" ng-repeat="amazon in amazons">
-    <img class="book-image" src="{{amazon['image']}}">
+    <a href={{amazon["link"]}} target="_blank">
+      <img class="book-image" src="{{amazon['image']}}">
+    </a>
   </div>
 </div>
 

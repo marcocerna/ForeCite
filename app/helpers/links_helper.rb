@@ -21,6 +21,7 @@ end
 def further_reading(query)
 
   # Grab wikipedia page from Heroku
+  query = query.split(" ").join("_")
   books_list = Nokogiri::HTML(open('http://en.wikipedia.org/wiki/' + query))
   @books = []
 
@@ -31,13 +32,6 @@ def further_reading(query)
 
   # Remove empty strings so we don't get extra 'li' elements
   @books.delete("\n")
-
-  # Grab titles and shove them into an array
-  @titles = []
-  @books.each do |book|
-    title = book.split(").")[1].split(".")[0]
-    @titles.push(title)
-  end
 
   # Return the correct thing for the HTML!
   @books

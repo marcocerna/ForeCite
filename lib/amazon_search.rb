@@ -7,6 +7,7 @@ def amazon_book_search(query)
   puts "Amazon request method has fired"
   # Sets up params hash with ISBN and all the other stuff Amazon needs
   current_time = DateTime.now.utc.strftime("%FT%TZ")
+  query = query.split(" ").join("_")
 
   params = {
           "Service" => "AWSECommerceService",
@@ -51,9 +52,11 @@ def amazon_book_search(query)
   parsed = Nokogiri::XML(request).remove_namespaces!
   images = parsed.xpath("//LargeImage")
   titles = parsed.xpath("//Title")
+  links = parsed.xpath("//DetailPageURL")
 
   image_array = []
   title_array = []
+  link_array = []
   attributes = []
 
   images.each do |image|
@@ -68,11 +71,10 @@ def amazon_book_search(query)
   end
 
   for i in (0..4)
-    attributes << {title: title_array[i], image: image_array[i]}
+    attributes << {title: title_array[i], image: image_array[i], link: links[i].text}
   end
 
   attributes
-  # binding.pry
 
 end
 

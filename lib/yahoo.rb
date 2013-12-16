@@ -31,6 +31,8 @@ module Yahoo
   end
 
   def boss_call(query)
+
+    query = query.split(" ").join("+")
     args = Hash.new
     args["q"] = "wiki+" + query
     buckets = "web"

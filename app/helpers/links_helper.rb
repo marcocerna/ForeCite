@@ -9,7 +9,7 @@ def nokoTest
 
   @array_of_stuff = []
 
-  wikiTest.css('ol.references').children().each do |link|
+  wikiTest.css('ol.references').children.each do |link|
     @array_of_stuff.push(link)
   end
 
@@ -25,7 +25,7 @@ def further_reading(query)
   @books = []
 
   # Push all elements from Further Reading into array (text only)
-  books_list.css('div.refbegin').children().children().each do |item|
+  books_list.css('div.refbegin').children.children.each do |item|
     @books.push(item.text)
   end
 

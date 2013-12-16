@@ -17,12 +17,12 @@ class Book < ActiveRecord::Base
             "AWSAccessKeyId" => ENV['AMAZON_KEY'],
             "AssociateTag" => ENV['AMAZON_ASSOCIATE_TAG'],
             "Condition" => "All",
-            "IdType" => "ISBN",
-            "ItemId" => isbn,
+            "IdType" => "ISBN", #####
+            "ItemId" => isbn, #####
             "Operation" => "ItemLookup",
-            "ResponseGroup" => "ItemAttributes,Images,Reviews",
+            "ResponseGroup" => "ItemAttributes,Images,Reviews", #####
             "SearchIndex" => "Books",
-            "Version" => "2009-01-06",
+            "Version" => "2009-01-06",#####
             "Timestamp" => current_time
             }
 

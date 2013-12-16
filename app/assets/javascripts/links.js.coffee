@@ -124,7 +124,11 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
 
     ajaxReq.success (data) ->
       $scope.books = data
-      $scope.getAmazon(data)
+      # $scope.getAmazon(data)
+      $scope.amazonSearch($scope.searchQuery)
+      # Here we need to put a $scope.topFiveBooks function  ###########################
+        # For now, have that go to a separate controller action top_five
+        # Tie that controller action to lib function
     .error (data) ->
       console.log 'ERROR: getBooks'
 
@@ -151,9 +155,21 @@ app.controller 'LinksController', ($scope, $http, $resource) ->
       $scope.currentWikiBook = data
       $scope.booksSelected = true
       $scope.hideLoadingBooks = "hide"
+      $scope.hideUntilSearch = "hide"
+
     .error (data) ->
       console.log 'ERROR: getAmazon'
 
   $scope.showBookTitle = (title) ->
     $scope.currentBookTitle = title
 
+  $scope.amazonSearch = (query) ->
+    ajaxReq = $http.get("/links/amazon_search/" + query)
+    ajaxReq.success (data) ->
+      console.log "amazonSearch successfully fired. Here's the data:"
+      console.log data
+      $scope.amazons = data
+      $scope.hideLoadingBooks = "hide"
+      $scope.hideUntilSearch = "hide"
+    .error (data) ->
+      console.log 'ERROR: amazonSearch'

@@ -1,12 +1,13 @@
 <div ng-controller="LinksController">
 
+
 <div id="header">
   <a href="#"><h1 id="forecite-logo" ng-click="clearAll">ForeCite</h1></a>
 
   <input  id="search-query" type="text" placeholder="Enter Search Query"    ng-model="searchQuery">
-  <button id="cats-button"  class="header-button clicked-{{catsSelected}}"  ng-click="getValidQuery(searchQuery, 'categories')">Get Categories</button>
-  <button id="links-button" class="header-button clicked-{{linksSelected}}" ng-click="getValidQuery(searchQuery, 'links')">Get Links</button>
-  <button id="books-button" class="header-button clicked-{{booksSelected}}" ng-click="getValidQuery(searchQuery, 'books')">Get Books</button>
+  <button class="header-button clicked-{{catsSelected}}"  ng-click="getValidQuery(searchQuery, 'categories')">Get Categories</button>
+  <button class="header-button clicked-{{linksSelected}}" ng-click="getValidQuery(searchQuery, 'links')">Get Links</button>
+  <button class="header-button clicked-{{booksSelected}}" ng-click="getValidQuery(searchQuery, 'books')">Get Books</button>
 </div>
 
 
@@ -15,51 +16,41 @@
 <div id="current-search" class="center-text">
   <h2>Currently searching for: {{searchQuery}} </h2>
   <a href="{{wikifiedQuery}}" target="_blank">Wiki Page</a>
-  <h3>{{currentBookTitle}}</h3>
+  <h3 ng-if="booksSelected">{{currentBookTitle}}</h3>
 </div>
 
-<div id="searchResults" class="center-text {{hideUntilSearch}}">
+<div id="searchResults" class="center-text" ng-if="searchResults">
   <h3 id="what-are-you-looking-for" class="center-text">What are you looking for? (Click one)</h3>
   <ul id="search-results-list" class='center-text'>
     <li class="list-search-query" ng-repeat="query in validQueries" ng-click="executeButton(query)">{{query}}</li>
   </ul>
 </div>
 
-<div id="loading-books" class="{{hideLoadingBooks}}">
-  <button id="loading-books-button" class="header-button">Loading Books, Please Wait</button>
-</div>
 
-<div id="books-display" class="{{hideBooks}}">
+<a href="/links/test">Link to Test!</a>
+
+
+<div id="books-display" ng-if="booksSelected">
   <div class="book-listing temp-book-class" ng-mouseover="showBookTitle(amazon['title'])" ng-repeat="amazon in amazons">
-    <a href={{amazon["link"]}} target="_blank">
-      <img class="book-image" src="{{amazon['image']}}">
-    </a>
+    <a href={{amazon["link"]}} target="_blank"><img class="book-image" src="{{amazon['image']}}"></a>
   </div>
 </div>
 
 
 <div id="left">
 
-  <!-- This grabs References links -->
-  <ul>
-    <%# @nokoTest.each do |item| %>
-    <!-- <li class="nokoTest list-element"><%#= item %></li> -->
-    <%# end %>
-  </ul>
-
-  <!-- <h3>Further Reading:</h3> -->
-  <ul>
+  <ul ng-if="booksSelected">
     <li class="furtherReading list-element" ng-repeat="book in books" ng-click="getAmazon([book])"><h5>{{book}}</h5></li>
   </ul>
 
-  <p class="category-header">Categories:</p>
-  <ul>
+  <p class="category-header" ng-if="catsSelected">Categories:</p>
+  <ul ng-if="catsSelected">
     <li class="left-list-element list-element" ng-mouseover="getTopics('Category:' + cat['title'])" ng-repeat="cat in cats">
       {{cat["title"]}}
     </li>
   </ul>
 
-  <ul>
+  <ul ng-if="linksSelected">
     <li ng-repeat="link in links">{{link["*"]}} </li>
   </ul>
 </div>
@@ -67,13 +58,13 @@
 
 <div id="right">
 
-  <p class="category-header">Topics for {{currentCategory}}:</p>
-  <ul>
+  <p class="category-header" ng-if="catsSelected">Topics for {{currentCategory}}:</p>
+  <ul ng-if="catsSelected">
     <li class="right-list-element list-element" ng-repeat="topic in topics" ng-click="getCategories(topic['title'])"> {{topic["title"]}} </li>
   </ul>
 
   <a href={{currentWikiBook[0]["link"]}} target="_blank">
-    <div class="current-wiki-book book-listing">
+    <div class="current-wiki-book book-listing" ng-if="booksSelected">
       <h3>{{currentWikiBook[0]['title']}}</h3>
       <img src="{{currentWikiBook[0]['image']}}">
     </div>

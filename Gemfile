@@ -8,7 +8,7 @@ gem 'rails', '3.2.14'
 # gem 'sqlite3'
 gem 'pg'
 gem 'rails_12factor'
-gem "d3-rails", "~> 3.3.7"
+# gem "d3-rails", "~> 3.3.7"
 gem 'nokogiri'
 gem 'figaro'
 gem 'typhoeus'

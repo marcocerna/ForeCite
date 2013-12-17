@@ -7,14 +7,12 @@ class LinksController < ApplicationController
     # @nokoTest = nokoTest
   end
 
-  # This is called from Angular getReading function
   def search
     @books = further_reading(params[:q])
     render json: @books
   end
 
   def products
-    puts "Products action has fired"
     @book = Book.create
     @amazon_data = @book.batch_requests(params[:q].split("-"))
     render json: @amazon_data
@@ -28,10 +26,6 @@ class LinksController < ApplicationController
   def amazon_search
     @book_search = amazon_book_search(params[:q])
     render json: @book_search
-  end
-
-  def test
-    render :test
   end
 
 end

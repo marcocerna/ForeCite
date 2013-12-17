@@ -7,18 +7,13 @@ ForeCiteControllers.controller "HelloCtrl", ($scope) ->
 
 ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $location) ->
 
-  $scope.clearAll = ->
-    $scope.linksSelected = false
-    $scope.catsSelected = false
-    $scope.booksSelected = false
-
   $scope.getValidQuery = (query, button) ->
     $scope.buttonSelected = button
     ajaxReq = $http.get("/links/boss/" + query)
 
     ajaxReq.success (data) ->
       $scope.searchResults = true
-      $scope.clearAll()
+      $scope.divSelected = false
       $scope.validQueries = data
 
   $scope.executeButton = (query) ->
@@ -29,28 +24,27 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
     $scope.searchResults = false
 
   $scope.getLinks = ->
-    $scope.linksSelected = true
-
     extlinks = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=extlinks&format=json&ellimit=200&titles=' + $scope.searchQuery + '&callback=JSON_CALLBACK'
     extlinks.success (data) ->
+
       $scope.links = data.query.pages[_.first _.keys data.query.pages].extlinks
       $location.path("/links").replace()
       $scope.$apply()
+      $scope.divSelected = true
 
   $scope.getCategories = (query) ->
-    $scope.catsSelected = true
-
     categories = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + (query) + '&callback=JSON_CALLBACK'
     categories.success (data) ->
+
       $scope.cats = data.query.pages[_.first _.keys data.query.pages].categories
       $scope.searchQuery = query
       $scope.wikifiedQuery = "http://en.wikipedia.org/wiki/" + $scope.searchQuery.split(" ").join("_")
       $location.path("/categories").replace()
       $scope.$apply()
+      $scope.divSelected = true
 
       for element in $scope.cats                     # This loop removes "Category:" from every string
-        newThing = element.title.split(":").pop()
-        element.title = newThing
+        element.title = element.title.split(":").pop()
 
   $scope.getTopics = (category) ->
     subcats = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&list=categorymembers&format=json&cmtitle=' + category + '&cmlimit=400&callback=JSON_CALLBACK'
@@ -59,7 +53,6 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
       $scope.currentCategory = category.split(":").pop()
 
   $scope.getBooks = ->
-    $scope.booksSelected = true
     $scope.amazons = null
     $scope.currentBookTitle = null
 
@@ -69,6 +62,7 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
       $scope.amazonSearch($scope.searchQuery)
       $location.path("/books").replace()
       $scope.$apply()
+      $scope.divSelected = true
 
   $scope.getAmazon = (books_array) ->                 # Refactor: Clean this up since we're now only sending one, not an array
     isbns = []

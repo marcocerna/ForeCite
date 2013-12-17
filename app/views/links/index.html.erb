@@ -4,7 +4,7 @@
 <div id="header">
   <a href="#"><h1 id="forecite-logo" ng-click="clearAll">ForeCite</h1></a>
 
-  <input  id="search-query" type="text" placeholder="Enter Search Query"    ng-model="searchQuery">
+  <input  id="search-query" type="text"                   ng-model="searchQuery"                placeholder="Enter Search Query" >
   <button class="header-button clicked-{{catsSelected}}"  ng-click="getValidQuery(searchQuery, 'categories')">Get Categories</button>
   <button class="header-button clicked-{{linksSelected}}" ng-click="getValidQuery(searchQuery, 'links')">Get Links</button>
   <button class="header-button clicked-{{booksSelected}}" ng-click="getValidQuery(searchQuery, 'books')">Get Books</button>
@@ -19,59 +19,14 @@
   <h3 ng-if="booksSelected">{{currentBookTitle}}</h3>
 </div>
 
-<div id="searchResults" class="center-text" ng-if="searchResults">
+<div id="searchResults"             class="center-text" ng-if="searchResults">
   <h3 id="what-are-you-looking-for" class="center-text">What are you looking for? (Click one)</h3>
-  <ul id="search-results-list" class='center-text'>
-    <li class="list-search-query" ng-repeat="query in validQueries" ng-click="executeButton(query)">{{query}}</li>
+  <ul id="search-results-list"      class='center-text'>
+    <li class="list-search-query"   ng-repeat="query in validQueries" ng-click="executeButton(query)">{{query}}</li>
   </ul>
 </div>
 
 
-<p>Div to render partials goes here:</p>
 <div ng-view></div>
-
-<div id="books-display" ng-if="booksSelected">
-  <div class="book-listing temp-book-class" ng-mouseover="showBookTitle(amazon['title'])" ng-repeat="amazon in amazons">
-    <a href={{amazon["link"]}} target="_blank"><img class="book-image" src="{{amazon['image']}}"></a>
-  </div>
-</div>
-
-
-<div id="left">
-
-  <ul ng-if="booksSelected">
-    <li class="furtherReading list-element" ng-repeat="book in books" ng-click="getAmazon([book])"><h5>{{book}}</h5></li>
-  </ul>
-
-  <p class="category-header" ng-if="catsSelected">Categories:</p>
-  <ul ng-if="catsSelected">
-    <li class="left-list-element list-element" ng-mouseover="getTopics('Category:' + cat['title'])" ng-repeat="cat in cats">
-      {{cat["title"]}}
-    </li>
-  </ul>
-
-  <ul ng-if="linksSelected">
-    <li ng-repeat="link in links">{{link["*"]}} </li>
-  </ul>
-</div>
-
-
-<div id="right">
-
-  <p class="category-header" ng-if="catsSelected">Topics for {{currentCategory}}:</p>
-  <ul ng-if="catsSelected">
-    <li class="right-list-element list-element" ng-repeat="topic in topics" ng-click="getCategories(topic['title'])"> {{topic["title"]}} </li>
-  </ul>
-
-  <a href={{currentWikiBook[0]["link"]}} target="_blank">
-    <div class="current-wiki-book book-listing" ng-if="booksSelected">
-      <h3>{{currentWikiBook[0]['title']}}</h3>
-      <img src="{{currentWikiBook[0]['image']}}">
-    </div>
-  </a>
-
-</div>
-
-
 </div>
 

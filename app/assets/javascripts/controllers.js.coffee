@@ -5,7 +5,7 @@ ForeCiteControllers = angular.module('ForeCite.controllers', [])
 ForeCiteControllers.controller "HelloCtrl", ($scope) ->
   $scope.greeting = "hello!!! welcome!"
 
-ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource) ->
+ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $location) ->
 
   $scope.clearAll = ->
     $scope.linksSelected = false
@@ -34,6 +34,8 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource) ->
     extlinks = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=extlinks&format=json&ellimit=200&titles=' + $scope.searchQuery + '&callback=JSON_CALLBACK'
     extlinks.success (data) ->
       $scope.links = data.query.pages[_.first _.keys data.query.pages].extlinks
+      $location.path("/links").replace()
+      $scope.$apply()
 
   $scope.getCategories = (query) ->
     $scope.catsSelected = true
@@ -43,6 +45,8 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource) ->
       $scope.cats = data.query.pages[_.first _.keys data.query.pages].categories
       $scope.searchQuery = query
       $scope.wikifiedQuery = "http://en.wikipedia.org/wiki/" + $scope.searchQuery.split(" ").join("_")
+      $location.path("/categories").replace()
+      $scope.$apply()
 
       for element in $scope.cats                     # This loop removes "Category:" from every string
         newThing = element.title.split(":").pop()
@@ -63,6 +67,8 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource) ->
     ajaxReq.success (data) ->
       $scope.books = data
       $scope.amazonSearch($scope.searchQuery)
+      $location.path("/books").replace()
+      $scope.$apply()
 
   $scope.getAmazon = (books_array) ->                 # Refactor: Clean this up since we're now only sending one, not an array
     isbns = []

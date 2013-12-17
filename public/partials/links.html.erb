@@ -1,1 +1,5 @@
-<p>This is the links div!</p>
+<div id="left">
+  <ul ng-if="linksSelected">
+    <li ng-repeat="link in links">{{link["*"]}} </li>
+  </ul>
+</div>

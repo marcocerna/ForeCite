@@ -29,7 +29,7 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
 
       $scope.links = data.query.pages[_.first _.keys data.query.pages].extlinks
       $location.path("/links").replace()
-      $scope.$apply()
+      # $scope.$apply()
       $scope.divSelected = true
 
   $scope.getCategories = (query) ->
@@ -38,9 +38,10 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
 
       $scope.cats = data.query.pages[_.first _.keys data.query.pages].categories
       $scope.searchQuery = query
+      alert "New category is " + $scope.searchQuery
       $scope.wikifiedQuery = "http://en.wikipedia.org/wiki/" + $scope.searchQuery.split(" ").join("_")
       $location.path("/categories").replace()
-      $scope.$apply()
+      # $scope.$apply()
       $scope.divSelected = true
 
       for element in $scope.cats                     # This loop removes "Category:" from every string
@@ -61,7 +62,7 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
       $scope.books = data
       $scope.amazonSearch($scope.searchQuery)
       $location.path("/books").replace()
-      $scope.$apply()
+      # $scope.$apply()
       $scope.divSelected = true
 
   $scope.getAmazon = (books_array) ->                 # Refactor: Clean this up since we're now only sending one, not an array

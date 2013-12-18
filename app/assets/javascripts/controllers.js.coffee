@@ -12,6 +12,7 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
     ajaxReq = $http.get("/links/boss/" + query)
 
     ajaxReq.success (data) ->
+      debugger
       $scope.searchResults = true
       $scope.divSelected = false
       $scope.validQueries = data

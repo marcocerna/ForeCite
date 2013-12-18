@@ -48,7 +48,8 @@ module Yahoo
       titles << title.split(" - ")[0] if title.include? "Wikipedia"
     end
 
-    titles.uniq!
+    titles.uniq! if titles.length > 1
+    titles
   end
 
 end

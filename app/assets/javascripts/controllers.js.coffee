@@ -12,7 +12,6 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
     ajaxReq = $http.get("/links/boss/" + query)
 
     ajaxReq.success (data) ->
-      debugger
       $scope.searchResults = true
       $scope.divSelected = false
       $scope.validQueries = data
@@ -28,6 +27,16 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
     extlinks = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=extlinks&format=json&ellimit=200&titles=' + $scope.searchQuery + '&callback=JSON_CALLBACK'
     extlinks.success (data) ->
       $scope.links = data.query.pages[_.first _.keys data.query.pages].extlinks
+
+      domainsList = []
+      parser = document.createElement("a")
+      for link in $scope.links
+        link["*"] = "http:" + link["*"] if /^\/\//i.test(link["*"])
+        parser.href = link["*"]
+        domainsList.push parser.host
+
+      $scope.domainsList = _.unique(domainsList)
+
       $location.path("/links").replace()
       $scope.divSelected = true
 
@@ -65,7 +74,6 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
       $scope.divSelected = true
 
   $scope.getAmazon = (books_array) ->                 # Refactor: Clean this up since we're now only sending one, not an array
-    debugger
     isbns = []
     for book in books_array
       isbn = book.split("ISBN")[1].replace("-", "").replace("-", "").replace("-", "").replace(".", "")

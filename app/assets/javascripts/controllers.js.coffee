@@ -82,3 +82,5 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
     ajaxReq = $http.get("/links/amazon_search/" + query)
     ajaxReq.success (data) ->
       $scope.amazons = data
+
+LinksController.$inject = ['$scope', '$http', '$resource', '$location']

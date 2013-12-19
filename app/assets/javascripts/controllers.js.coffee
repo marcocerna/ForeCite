@@ -6,7 +6,7 @@ ForeCiteControllers.controller "HelloCtrl", ($scope) ->
   $scope.greeting = "hello!!! welcome!"
 
 ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $location) ->
-
+  $scope.currentDomain
   $scope.getValidQuery = (query, button) ->
     $scope.buttonSelected = button
     ajaxReq = $http.get("/links/boss/" + query)
@@ -35,10 +35,23 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
         parser.href = link["*"]
         domainsList.push parser.host
 
-      $scope.domainsList = _.unique(domainsList)
+      $scope.domains = _.unique(domainsList)
+
+      all_links = {}
+      for domain in $scope.domains
+        arr = []
+        for link in $scope.links
+          arr.push link["*"] if _.contains link["*"], domain
+        all_links[domain] = arr
+      # $scope.links = all_links
+      debugger
 
       $location.path("/links").replace()
       $scope.divSelected = true
+
+  $scope.consoleCurrentDomain = ->
+    console.log $scope.currentDomain
+    debugger
 
   $scope.getCategories = (query) ->
 

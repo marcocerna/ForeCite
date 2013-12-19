@@ -1,5 +1,13 @@
 <div id="left" ng-if="divSelected">
   <ul>
-    <li ng-repeat="link in links">{{link["*"]}} </li>
+    <!-- <li ng-repeat="link in links">{{link["*"]}} </li> -->
+    <li ng-repeat="domain in domains" ng-mouseover="$parent.$parent.currentDomain = domain">{{domain}}</li>
+  </ul>
+</div>
+
+<div id="right" ng-if="divSelected">
+  <p>Current Domain is {{currentDomain}}</p>
+  <ul>
+    <li ng-repeat="link in links | filter:currentDomain">{{link["*"] }}</li>
   </ul>
 </div>

@@ -4,7 +4,6 @@ class LinksController < ApplicationController
   include AmazonSearch
 
   def index
-    # @nokoTest = nokoTest
   end
 
   def search

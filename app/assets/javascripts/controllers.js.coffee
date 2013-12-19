@@ -1,5 +1,4 @@
 ForeCiteControllers = angular.module('ForeCite.controllers', [])
-
 ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $location) ->
 
   $scope.getValidQuery = (query, button) ->
@@ -9,10 +8,10 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
       $scope.searchResults  = true
       $scope.divSelected    = false
       $scope.validQueries   = data
+      $scope.cats = null
+      $scope.topics = null
 
   $scope.executeButton = (query) ->
-    $scope.cats = null
-    $scope.topics = null
     $scope.searchQuery = query
     $scope.getLinks()                         if $scope.buttonSelected == "links"
     $scope.getCategories($scope.searchQuery)  if $scope.buttonSelected == "categories"
@@ -20,8 +19,8 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
     $scope.searchResults = false
 
   $scope.getLinks = ->
-    extlinks = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=extlinks&format=json&ellimit=200&titles=' + $scope.searchQuery + '&callback=JSON_CALLBACK'
-    extlinks.success (data) ->
+    ajaxReq = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=extlinks&format=json&ellimit=200&titles=' + $scope.searchQuery + '&callback=JSON_CALLBACK'
+    ajaxReq.success (data) ->
       $scope.links = data.query.pages[_.first _.keys data.query.pages].extlinks
 
       # Extra stuff: Get domains
@@ -37,20 +36,18 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
       $scope.divSelected = true
 
   $scope.getCategories = (query) ->
-    categories = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + (query) + '&callback=JSON_CALLBACK'
-    categories.success (data) ->
+    ajaxReq = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + (query) + '&callback=JSON_CALLBACK'
+    ajaxReq.success (data) ->
       $scope.cats = data.query.pages[_.first _.keys data.query.pages].categories
 
-      # Extra stuff: Set searchQuery and wiki link
+      # Extra stuff: 1) Set searchQuery; 2) Set wiki link; 3) Remove "Category:" string
       ele = angular.element('#search-query')
       ele.scope().searchQuery = query
-      ele.val(query)                                                        # Check whether this is needed
       ele.scope().wikifiedQuery = "http://en.wikipedia.org/wiki/" + ele.scope().searchQuery.split(" ").join("_")
       element.title = element.title.split(":").pop() for element in $scope.cats
 
       $location.path("/categories").replace()
       $scope.divSelected = true
-
 
   $scope.getTopics = (category) ->
     subcats = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&list=categorymembers&format=json&cmtitle=' + category + '&cmlimit=400&callback=JSON_CALLBACK'

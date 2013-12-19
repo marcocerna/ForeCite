@@ -37,21 +37,11 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
 
       $scope.domains = _.unique(domainsList)
 
-      all_links = {}
-      for domain in $scope.domains
-        arr = []
-        for link in $scope.links
-          arr.push link["*"] if _.contains link["*"], domain
-        all_links[domain] = arr
-      # $scope.links = all_links
-      debugger
-
       $location.path("/links").replace()
       $scope.divSelected = true
 
   $scope.consoleCurrentDomain = ->
     console.log $scope.currentDomain
-    debugger
 
   $scope.getCategories = (query) ->
 

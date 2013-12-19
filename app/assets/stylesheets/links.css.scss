@@ -100,6 +100,9 @@ button.header-button:hover {
   background-color: #e67e22;
 }
 
+.hide-unless- {
+  display: none;
+}
 
 
 // List styles
@@ -142,6 +145,16 @@ button.show-button {
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;
+}
+
+.domain {
+  text-decoration: none;
+  color: #7598c9;
+}
+
+.domain:hover {
+  background-color: #bdc3c7;
+  color: white;
 }
 
 // Book styles
@@ -198,17 +211,4 @@ img.book-image {
 
 .hide-until-search {
   display:none
-}
-
-
-// d3 styles
-
-.node {
-  stroke: #fff;
-  stroke-width: 1.5px;
-}
-
-.link {
-  stroke: #999;
-  stroke-opacity: .6;
 }

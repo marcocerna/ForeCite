@@ -15,7 +15,7 @@
 
 <div id="current-search" class="center-text">
   <h2>Currently searching for: {{searchQuery}} </h2>
-  <a href="{{wikifiedQuery}}" target="_blank">Wiki Page</a>
+  <a class="hide-unless-{{wikifiedQuery}}" href="{{wikifiedQuery}}" target="_blank">Wiki Page</a>
 </div>
 
 <div id="searchResults"             class="center-text" ng-if="searchResults">

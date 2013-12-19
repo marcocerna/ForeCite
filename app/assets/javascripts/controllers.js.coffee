@@ -1,20 +1,14 @@
 ForeCiteControllers = angular.module('ForeCite.controllers', [])
 
-# This is for testing only
-# Maybe use it for a welcome page later
-ForeCiteControllers.controller "HelloCtrl", ($scope) ->
-  $scope.greeting = "hello!!! welcome!"
-
 ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $location) ->
-  $scope.currentDomain
+
   $scope.getValidQuery = (query, button) ->
     $scope.buttonSelected = button
     ajaxReq = $http.get("/links/boss/" + query)
-
     ajaxReq.success (data) ->
-      $scope.searchResults = true
-      $scope.divSelected = false
-      $scope.validQueries = data
+      $scope.searchResults  = true
+      $scope.divSelected    = false
+      $scope.validQueries   = data
 
   $scope.executeButton = (query) ->
     $scope.searchQuery = query
@@ -28,34 +22,33 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
     extlinks.success (data) ->
       $scope.links = data.query.pages[_.first _.keys data.query.pages].extlinks
 
+      # Extra stuff: Get domains
       domainsList = []
       parser = document.createElement("a")
       for link in $scope.links
         link["*"] = "http:" + link["*"] if /^\/\//i.test(link["*"])
         parser.href = link["*"]
         domainsList.push parser.host
-
       $scope.domains = _.unique(domainsList)
 
       $location.path("/links").replace()
       $scope.divSelected = true
 
-  $scope.consoleCurrentDomain = ->
-    console.log $scope.currentDomain
-
   $scope.getCategories = (query) ->
-
     categories = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + (query) + '&callback=JSON_CALLBACK'
     categories.success (data) ->
-
       $scope.cats = data.query.pages[_.first _.keys data.query.pages].categories
+
+      # Extra stuff: Set searchQuery and wiki link
       ele = angular.element('#search-query')
       ele.scope().searchQuery = query
-      ele.val(query)
+      ele.val(query)      # Check whether this is needed
       ele.scope().wikifiedQuery = "http://en.wikipedia.org/wiki/" + ele.scope().searchQuery.split(" ").join("_")
+
       $location.path("/categories").replace()
       $scope.divSelected = true
 
+      # Maybe make this one line and stick further up in the function? same as line 60
       for element in $scope.cats                     # This loop removes "Category:" from every string
         element.title = element.title.split(":").pop()
 
@@ -72,11 +65,17 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
     ajaxReq = $http.get("/links/search/" + $scope.searchQuery)
     ajaxReq.success (data) ->
       $scope.books = data
-      $scope.amazonSearch($scope.searchQuery)
+      $scope.getAmazonBooks($scope.searchQuery)
+
       $location.path("/books").replace()
       $scope.divSelected = true
 
-  $scope.getAmazon = (books_array) ->                 # Refactor: Clean this up since we're now only sending one, not an array
+  $scope.getAmazonBooks = (query) ->
+    ajaxReq = $http.get("/links/amazon_search/" + query)
+    ajaxReq.success (data) ->
+      $scope.amazons = data
+
+  $scope.getWikiBook = (books_array) ->                 # Refactor: Clean this up since we're now only sending one, not an array
     isbns = []
     for book in books_array
       isbn = book.split("ISBN")[1].replace("-", "").replace("-", "").replace("-", "").replace(".", "")
@@ -89,10 +88,5 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
 
   $scope.showBookTitle = (title) ->
     $scope.currentBookTitle = title
-
-  $scope.amazonSearch = (query) ->
-    ajaxReq = $http.get("/links/amazon_search/" + query)
-    ajaxReq.success (data) ->
-      $scope.amazons = data
 
 LinksController.$inject = ['$scope', '$http', '$resource', '$location']

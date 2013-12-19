@@ -9,6 +9,6 @@ ForeCiteApp.config(['$routeProvider', ($routeProvider) ->
     $routeProvider.when('/links',       {templateUrl: '/partials/links.html.erb',       controller: 'LinksController'})
     $routeProvider.when('/categories',  {templateUrl: '/partials/categories.html.erb',  controller: 'LinksController'})
     $routeProvider.when('/books',       {templateUrl: '/partials/books.html.erb',       controller: 'LinksController'})
-    $routeProvider.when('/links/test',  {templateUrl: 'links/test.html',                controller: 'HelloCtrl'})
+    # $routeProvider.when('/links/test',  {templateUrl: 'links/test.html',                controller: 'HelloCtrl'})
     $routeProvider.otherwise({redirectTo: '/'})
   ])

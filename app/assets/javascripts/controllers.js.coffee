@@ -11,6 +11,8 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
       $scope.validQueries   = data
 
   $scope.executeButton = (query) ->
+    $scope.cats = null
+    $scope.topics = null
     $scope.searchQuery = query
     $scope.getLinks()                         if $scope.buttonSelected == "links"
     $scope.getCategories($scope.searchQuery)  if $scope.buttonSelected == "categories"
@@ -42,15 +44,13 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
       # Extra stuff: Set searchQuery and wiki link
       ele = angular.element('#search-query')
       ele.scope().searchQuery = query
-      ele.val(query)      # Check whether this is needed
+      ele.val(query)                                                        # Check whether this is needed
       ele.scope().wikifiedQuery = "http://en.wikipedia.org/wiki/" + ele.scope().searchQuery.split(" ").join("_")
+      element.title = element.title.split(":").pop() for element in $scope.cats
 
       $location.path("/categories").replace()
       $scope.divSelected = true
 
-      # Maybe make this one line and stick further up in the function? same as line 60
-      for element in $scope.cats                     # This loop removes "Category:" from every string
-        element.title = element.title.split(":").pop()
 
   $scope.getTopics = (category) ->
     subcats = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&list=categorymembers&format=json&cmtitle=' + category + '&cmlimit=400&callback=JSON_CALLBACK'

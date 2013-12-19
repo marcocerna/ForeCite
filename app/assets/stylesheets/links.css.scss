@@ -76,7 +76,7 @@ li:hover {
 }
 
 #search-query {
-  width: 600px;
+  width: 50%;
   font-size: 18px;
   border: 1px solid grey;
   padding: 5px;
@@ -98,6 +98,10 @@ button.header-button:hover {
 
 .clicked-true {
   background-color: #e67e22;
+}
+
+.hide {
+  display: none;
 }
 
 .hide-unless- {
@@ -211,4 +215,57 @@ img.book-image {
 
 .hide-until-search {
   display:none
+}
+
+#welcome {
+  text-align: center;
+  background-color: #2980b9;
+  color: white;
+  padding: 60px;
+  margin: -10px;
+  height: 250px;
+  margin-bottom: 20px;
+}
+
+#welcome-headline {
+  font-size: 80px;
+  font-weight: 400;
+}
+
+#welcome-text {
+  font-weight: 300;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.glass-icon {
+  width: 100px;
+}
+
+#icon-bar {
+  display: inline-block;
+  text-align: center;
+  clear: both;
+}
+
+.blurb-icon {
+  display: inline-block;
+  width: 30%;
+  text-align: center;
+  // border: 1px solid black;
+  margin: 10px;
+  clear: none;
+}
+
+#left-blurb {
+  float: left;
+}
+
+#middle-blurb {
+  float: center;
+  margin: 10px 30px 0px 30px;
+}
+
+#right-blurb {
+  float: right
 }

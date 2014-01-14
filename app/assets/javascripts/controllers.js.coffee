@@ -86,6 +86,11 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
   $scope.showBookTitle = (title) ->
     $scope.currentBookTitle = title
 
+  $scope.returnToLanding = ->
+    ele = angular.element('#search-query')
+    ele.scope().searchQuery = null
+    ele.scope().searchResults = null
+
 LinksController.$inject = ['$scope', '$http', '$resource', '$location']
 
 

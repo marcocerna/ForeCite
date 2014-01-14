@@ -2,7 +2,7 @@
 
 
 <div id="header">
-  <a href="#" ng-click="$parent.searchQuery = null"><h1 id="forecite-logo" ng-click="clearAll">ForeCite</h1></a>
+  <a href="#" ng-click="returnToLanding()"><h1 id="forecite-logo" ng-click="clearAll">ForeCite</h1></a>
 
   <input  id="search-query" type="text"                   ng-model="searchQuery"                placeholder="Enter Search Query" >
   <button class="header-button clicked-{{catsSelected}}"  ng-click="getValidQuery(searchQuery, 'categories')">Get Categories</button>

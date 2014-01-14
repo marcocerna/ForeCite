@@ -16,6 +16,7 @@ body {
 
   background-size: 100% auto;
   background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 button {
@@ -48,6 +49,8 @@ li:hover {
 #right {
   width: 45%;
   float: right;
+  margin-right: -15px;
+  overflow-x: hidden;
 }
 
 #current-search {
@@ -166,7 +169,7 @@ ul {
 
 .category-header {
   padding: 15px 15px 15px 15px;
-  margin: 0px 0px 0px -10px;
+  margin: 0px -10px 0px -10px;
   background-color: #2980b9;
   color: white;
 }
@@ -214,7 +217,7 @@ button.show-button {
   color: white;
 }
 
-#left > #domains-header {
+#right > #domains-header {
   margin-right: -15px;
 }
 
@@ -283,7 +286,7 @@ img.book-image {
 
 #welcome {
   text-align: center;
-  background-color: rgba(49, 128, 185, 0.85);
+  background-color: rgba(34, 34, 34, 0.85);
   color: white;
   padding: 60px;
   margin: -10px;
@@ -319,6 +322,8 @@ img.book-image {
   color: white;
   margin: 10px;
   clear: none;
+  background-color: rgba(49, 128, 185, 0.85);
+  padding: 10px 0px 10px 0px;
 }
 
 #left-blurb {

@@ -1,6 +1,6 @@
 <div ng-if="divSelected">
   <div id="left">
-    <p>Domains</p>
+    <h3 id="domains-header">Domains</h3>
     <ul>
       <a class="domain" href="http://{{currentDomain}}" target="_blank">
       <li class="list-element" ng-repeat="domain in domains" ng-mouseover="$parent.$parent.currentDomain = domain">
@@ -10,10 +10,10 @@
   </div>
 
   <div id="right">
-    <p>Current Domain is {{currentDomain}}</p>
+    <h3 id="domains-header">Current Domain is {{currentDomain}}</h3>
     <ul>
       <a href="{{currentTopic}}" target="_blank">
-      <li class="list-element" ng-repeat="link in links | filter:currentDomain" ng-mouseover="$parent.$parent.currentTopic = link['*']">
+      <li class="list-element right-list-element" ng-repeat="link in links | filter:currentDomain" ng-mouseover="$parent.$parent.currentTopic = link['*']">
         {{link["*"] }}
       </li>
       </a>

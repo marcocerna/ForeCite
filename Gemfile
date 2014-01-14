@@ -13,7 +13,7 @@ gem 'nokogiri'
 gem 'figaro'
 gem 'typhoeus'
 gem 'oauth'
-# gem 'unicorn'
+gem 'unicorn'
 
 # Gems used only for assets and not required
 # in production environments by default.

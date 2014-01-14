@@ -1,6 +1,6 @@
 <div ng-if="divSelected">
   <div id="left">
-    <p class="category-header">Categories:</p>
+    <h3 class="category-header">Categories</h3>
     <ul>
       <li class="left-list-element list-element" ng-mouseover="getTopics('Category:' + cat['title'])" ng-repeat="cat in cats">
         {{cat["title"]}}
@@ -9,7 +9,7 @@
   </div>
 
   <div id="right">
-    <p class="category-header">Topics for {{currentCategory}}:</p>
+    <h3 class="category-header">Topics for {{currentCategory}}:</h3>
     <ul>
       <li class="right-list-element list-element" ng-repeat="topic in topics" ng-click="getCategories(topic['title'])"> {{topic["title"]}} </li>
     </ul>

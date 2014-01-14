@@ -2,8 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import url("http://fonts.googleapis.com/css?family=Lustria");
+
 body {
   font-family: Karla;
+
+  background:
+    linear-gradient(
+      rgba(132, 192, 215, 0.45),
+      rgba(132, 192, 215, 0.45)
+    ),
+    url(books.png);
+
+  background-size: 100% auto;
+  background-attachment: fixed;
 }
 
 button {
@@ -15,8 +27,14 @@ a {
   text-decoration: none;
 }
 
+li {
+  opacity: 0.9;
+  overflow-x: hidden
+
+}
+
 li:hover {
-  background-color: #bdc3c7;
+  background-color: #c0392b;
   color: white;
 }
 
@@ -34,6 +52,13 @@ li:hover {
 
 #current-search {
   text-align: center;
+  margin-left: -20px;
+  margin-right: -20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid black;
+  background-color: rgba(34, 34, 34, 0.85);
+  color: white
 }
 
 #search-results {
@@ -46,6 +71,7 @@ li:hover {
 
 .center-text {
   text-align: center;
+  color: white;
 }
 
 #search-results-list {
@@ -113,15 +139,15 @@ button.header-button:hover {
 
 ul {
   list-style-type: none;
+  margin-top: 0px;
 }
 
 .list-element {
-  background-color: #e0e0e0;
-  // border-radius: 2px;
+  background-color: #44a0de;
+  color: white;
   padding: 5px 15px 5px 15px;
   margin: 0px 10px 0px 10px;
   font-family: Helvetica;
-  color: #7598c9;
   cursor: pointer;
 }
 
@@ -131,6 +157,26 @@ ul {
 
 .left-list-element {
   width: 300px;
+}
+
+.right-list-element {
+  width: 600px;
+  margin-right: -15px;
+}
+
+.category-header {
+  padding: 15px 15px 15px 15px;
+  margin: 0px 0px 0px -10px;
+  background-color: #2980b9;
+  color: white;
+}
+
+#left > .category-header {
+  width: 300px;
+}
+
+#right > .category-header {
+  margin-right: -10px;
 }
 
 .category-link {
@@ -157,8 +203,19 @@ button.show-button {
 }
 
 .domain:hover {
-  background-color: #bdc3c7;
+  background-color: #c0392b;
   color: white;
+}
+
+#domains-header {
+  padding: 15px 0px 15px 15px;
+  margin: 0px 10px 0px -10px;
+  background-color: #2980b9;
+  color: white;
+}
+
+#left > #domains-header {
+  margin-right: -15px;
 }
 
 // Book styles
@@ -167,6 +224,13 @@ button.show-button {
   width: 1000px;
   margin-left: auto;
   margin-right: auto;
+}
+
+#books-header {
+  padding: 15px 0px 15px 15px;
+  margin: 0px 10px 0px -10px;
+  background-color: #2980b9;
+  color: white;
 }
 
 .book-listing {
@@ -219,7 +283,7 @@ img.book-image {
 
 #welcome {
   text-align: center;
-  background-color: #2980b9;
+  background-color: rgba(49, 128, 185, 0.85);
   color: white;
   padding: 60px;
   margin: -10px;
@@ -252,7 +316,7 @@ img.book-image {
   display: inline-block;
   width: 30%;
   text-align: center;
-  // border: 1px solid black;
+  color: white;
   margin: 10px;
   clear: none;
 }
@@ -268,4 +332,12 @@ img.book-image {
 
 #right-blurb {
   float: right
+}
+
+.furtherReading {
+  font-family: Lustria;
+}
+
+#wiki-link {
+  color: #2980b9;
 }

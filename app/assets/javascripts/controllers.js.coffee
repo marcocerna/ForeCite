@@ -87,3 +87,5 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
     $scope.currentBookTitle = title
 
 LinksController.$inject = ['$scope', '$http', '$resource', '$location']
+
+

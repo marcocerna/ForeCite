@@ -4,5 +4,6 @@ ForeCite::Application.routes.draw do
   get "links/products/:q",      to: "links#products"
   get "links/boss/:q",          to: "links#boss"
   get "links/amazon_search/:q", to: "links#amazon_search"
+  get "links/domain/:q",        to: "links#domain"
   # resources :links
 end

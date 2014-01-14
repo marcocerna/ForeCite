@@ -3,14 +3,14 @@
     <h3 id="domains-header">Domains</h3>
     <ul>
       <a class="domain" href="http://{{currentDomain}}" target="_blank">
-      <li class="list-element" ng-repeat="domain in domains" ng-mouseover="$parent.$parent.currentDomain = domain">
+      <li class="list-element" ng-repeat="domain in domains" ng-mouseover="$parent.$parent.currentDomain = domain;getDomainName(domain)">
         {{domain}}
       </li></a>
     </ul>
   </div>
 
   <div id="right">
-    <h3 id="domains-header">Current Domain is {{currentDomain}}</h3>
+    <h3 id="domains-header">Current Domain is {{currentDomainName}}</h3>
     <ul>
       <a href="{{currentTopic}}" target="_blank">
       <li class="list-element right-list-element" ng-repeat="link in links | filter:currentDomain" ng-mouseover="$parent.$parent.currentTopic = link['*']">

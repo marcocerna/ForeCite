@@ -35,6 +35,13 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
       $location.path("/links").replace()
       $scope.divSelected = true
 
+    # $scope.getDomainName = (domain) ->
+    #   console.log domain
+    #   data =
+    #     foo: domain
+    #   $http.get('/links/domain/' + domain)
+
+
   $scope.getCategories = (query) ->
     ajaxReq = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + (query) + '&callback=JSON_CALLBACK'
     ajaxReq.success (data) ->

@@ -27,4 +27,9 @@ class LinksController < ApplicationController
     render json: @book_search
   end
 
+  def domain
+    @domain_name = Pismo[params[:q]].title
+    render json: @domain_name
+  end
+
 end

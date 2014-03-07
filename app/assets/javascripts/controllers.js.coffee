@@ -1,5 +1,5 @@
-ForeCiteControllers = angular.module('ForeCite.controllers', [])
-ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $location) ->
+angular.module('ForeCite')
+.controller 'AppCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
 
   $scope.getValidQuery = (query, button) ->
     $scope.buttonSelected = button
@@ -93,11 +93,12 @@ ForeCiteControllers.controller 'LinksController', ($scope, $http, $resource, $lo
   $scope.showBookTitle = (title) ->
     $scope.currentBookTitle = title
 
+  # This is where the scope got all wonky. Investigate what's happening with scope levels here.
   $scope.returnToLanding = ->
     ele = angular.element('#search-query')
     ele.scope().searchQuery = null
     ele.scope().searchResults = null
 
-LinksController.$inject = ['$scope', '$http', '$resource', '$location']
+]
 
 

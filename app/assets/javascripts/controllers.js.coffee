@@ -1,3 +1,6 @@
+# Note: This used to be it's own module injected into app.js
+# Instead, we're using a getter now, much cleaner
+
 angular.module('ForeCite')
 .controller 'AppCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
 
@@ -98,7 +101,6 @@ angular.module('ForeCite')
     ele = angular.element('#search-query')
     ele.scope().searchQuery = null
     ele.scope().searchResults = null
-
 ]
 
 

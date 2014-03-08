@@ -2,6 +2,7 @@ angular.module('ForeCite')
 .controller 'BooksCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
 
   $scope.getBooks = ->
+    # app.divSelected = false
     $scope.amazons = null
     $scope.currentBookTitle = null
 
@@ -9,7 +10,7 @@ angular.module('ForeCite')
     ajaxReq.success (data) ->
       $scope.books = data
       $scope.getAmazonBooks($scope.searchQuery)
-      $scope.divSelected = true
+      $scope.$parent.divSelected = true
 
   $scope.getAmazonBooks = (query) ->
     ajaxReq = $http.get("/links/amazon_search/" + query)

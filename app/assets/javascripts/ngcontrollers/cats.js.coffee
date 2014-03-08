@@ -11,7 +11,7 @@ angular.module('ForeCite')
       ele.scope().searchQuery = query
       ele.scope().wikifiedQuery = "http://en.wikipedia.org/wiki/" + ele.scope().searchQuery.split(" ").join("_")
       element.title = element.title.split(":").pop() for element in $scope.cats
-      $scope.divSelected = true
+      $scope.$parent.divSelected = true
 
   $scope.getTopics = (category) ->
     subcats = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&list=categorymembers&format=json&cmtitle=' + category + '&cmlimit=400&callback=JSON_CALLBACK'
@@ -20,7 +20,6 @@ angular.module('ForeCite')
       $scope.currentCategory = category.split(":").pop()
 
   $scope.init = ->
-    console.log "CatsCtrl works!"
     $scope.getCategories($scope.searchQuery)
 
   $scope.init()

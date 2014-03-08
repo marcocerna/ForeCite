@@ -14,10 +14,9 @@ angular.module('ForeCite')
         parser.href = link["*"]
         domainsList.push parser.host
       $scope.domains = _.unique(domainsList)
-      $scope.divSelected = true
+      $scope.$parent.divSelected = true
 
   $scope.init = ->
-    console.log "LinksCtrl works!"
     $scope.getLinks()
 
   $scope.init()

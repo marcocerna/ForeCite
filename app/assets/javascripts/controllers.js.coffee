@@ -17,42 +17,9 @@ app.controller 'AppCtrl', ['$scope', '$http', '$resource', '$location', ($scope,
   $scope.executeButton = (query) ->
     $scope.searchQuery = query
     $location.path("/links").replace()        if $scope.buttonSelected == "links"
-    $scope.getCategories($scope.searchQuery)  if $scope.buttonSelected == "categories"
-    $scope.getBooks()                         if $scope.buttonSelected == "books"
+    $location.path("/categories").replace()   if $scope.buttonSelected == "categories"
+    $location.path("/books").replace()        if $scope.buttonSelected == "books"
     $scope.searchResults = false
-
-
-  $scope.getCategories = (query) ->
-    ajaxReq = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + (query) + '&callback=JSON_CALLBACK'
-    ajaxReq.success (data) ->
-      $scope.cats = data.query.pages[_.first _.keys data.query.pages].categories
-
-      # Extra stuff: 1) Set searchQuery; 2) Set wiki link; 3) Remove "Category:" string
-      ele = angular.element('#search-query')
-      ele.scope().searchQuery = query
-      ele.scope().wikifiedQuery = "http://en.wikipedia.org/wiki/" + ele.scope().searchQuery.split(" ").join("_")
-      element.title = element.title.split(":").pop() for element in $scope.cats
-
-      $location.path("/categories").replace()
-      $scope.divSelected = true
-
-  $scope.getTopics = (category) ->
-    subcats = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&list=categorymembers&format=json&cmtitle=' + category + '&cmlimit=400&callback=JSON_CALLBACK'
-    subcats.success (data) ->
-      $scope.topics = data.query.categorymembers
-      $scope.currentCategory = category.split(":").pop()
-
-  $scope.getBooks = ->
-    $scope.amazons = null
-    $scope.currentBookTitle = null
-
-    ajaxReq = $http.get("/links/search/" + $scope.searchQuery)
-    ajaxReq.success (data) ->
-      $scope.books = data
-      # $scope.getAmazonBooks($scope.searchQuery)
-
-      $location.path("/books").replace()
-      $scope.divSelected = true
 
   # This is where the scope got all wonky. Investigate what's happening with scope levels here.
   $scope.returnToLanding = ->
@@ -76,8 +43,6 @@ app.controller 'LinksCtrl', ['$scope', '$http', '$resource', '$location', ($scop
         parser.href = link["*"]
         domainsList.push parser.host
       $scope.domains = _.unique(domainsList)
-
-      $location.path("/links").replace()
       $scope.divSelected = true
 
   $scope.init = ->
@@ -88,6 +53,16 @@ app.controller 'LinksCtrl', ['$scope', '$http', '$resource', '$location', ($scop
 ]
 
 app.controller 'BooksCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
+
+  $scope.getBooks = ->
+    $scope.amazons = null
+    $scope.currentBookTitle = null
+
+    ajaxReq = $http.get("/links/search/" + $scope.searchQuery)
+    ajaxReq.success (data) ->
+      $scope.books = data
+      $scope.getAmazonBooks($scope.searchQuery)
+      $scope.divSelected = true
 
   $scope.getAmazonBooks = (query) ->
     ajaxReq = $http.get("/links/amazon_search/" + query)
@@ -109,7 +84,34 @@ app.controller 'BooksCtrl', ['$scope', '$http', '$resource', '$location', ($scop
     $scope.currentBookTitle = title
 
   $scope.init = ->
-    $scope.getAmazonBooks($scope.searchQuery)
+    $scope.getBooks()
+
+  $scope.init()
+]
+
+app.controller 'CatsCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
+
+  $scope.getCategories = (query) ->
+    ajaxReq = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + (query) + '&callback=JSON_CALLBACK'
+    ajaxReq.success (data) ->
+      $scope.cats = data.query.pages[_.first _.keys data.query.pages].categories
+
+      # Extra stuff: 1) Set searchQuery; 2) Set wiki link; 3) Remove "Category:" string
+      ele = angular.element('#search-query')
+      ele.scope().searchQuery = query
+      ele.scope().wikifiedQuery = "http://en.wikipedia.org/wiki/" + ele.scope().searchQuery.split(" ").join("_")
+      element.title = element.title.split(":").pop() for element in $scope.cats
+      $scope.divSelected = true
+
+  $scope.getTopics = (category) ->
+    subcats = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&list=categorymembers&format=json&cmtitle=' + category + '&cmlimit=400&callback=JSON_CALLBACK'
+    subcats.success (data) ->
+      $scope.topics = data.query.categorymembers
+      $scope.currentCategory = category.split(":").pop()
+
+  $scope.init = ->
+    console.log "CatsCtrl works!"
+    $scope.getCategories($scope.searchQuery)
 
   $scope.init()
 ]

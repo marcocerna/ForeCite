@@ -2,21 +2,21 @@ angular.module('ForeCite')
 .controller 'BooksCtrl', ['$scope', '$http', ($scope, $http) ->
 
   $scope.getBooks = ->
-    ajaxReq = $http.get("/links/search/" + $scope.searchQuery)
-    ajaxReq.success (data) ->
+    $http.get("/links/search/" + $scope.searchQuery)
+    .success (data) ->
       $scope.books = data
       $scope.getAmazonBooks($scope.searchQuery)
       $scope.$parent.divSelected = true
 
   $scope.getAmazonBooks = (query) ->
-    ajaxReq = $http.get("/links/amazon_search/" + query)
-    ajaxReq.success (data) ->
+    $http.get("/links/amazon_search/" + query)
+    .success (data) ->
       $scope.amazons = data
 
   $scope.getWikiBook = (book) ->
     isbn = book.split("ISBN")[1].replace("-", "").replace("-", "").replace("-", "").replace(".", "")
-    ajaxReq = $http.get("/links/products/" + isbn)
-    ajaxReq.success (data) ->
+    $http.get("/links/products/" + isbn)
+    .success (data) ->
       $scope.currentWikiBook = data
 
   $scope.showBookTitle = (title) ->

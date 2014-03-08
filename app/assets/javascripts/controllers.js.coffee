@@ -1,6 +1,3 @@
-# Using getter, putting it in var because that'll (hopefully) get multiple Ctrl to work
-# In future, try to have Ctrls act on module directly
-
 angular.module('ForeCite')
 .controller 'AppCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
 

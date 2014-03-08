@@ -1,8 +1,8 @@
-# Note: This used to be it's own module injected into app.js
-# Instead, we're using a getter now, much cleaner
+# Using getter, putting it in var because that'll (hopefully) get multiple Ctrl to work
+# In future, try to have Ctrls act on module directly
 
-angular.module('ForeCite')
-.controller 'AppCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
+app = angular.module('ForeCite')
+app.controller 'AppCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
 
   $scope.getValidQuery = (query, button) ->
     $scope.buttonSelected = button
@@ -16,33 +16,10 @@ angular.module('ForeCite')
 
   $scope.executeButton = (query) ->
     $scope.searchQuery = query
-    $scope.getLinks()                         if $scope.buttonSelected == "links"
+    $location.path("/links").replace()        if $scope.buttonSelected == "links"
     $scope.getCategories($scope.searchQuery)  if $scope.buttonSelected == "categories"
     $scope.getBooks()                         if $scope.buttonSelected == "books"
     $scope.searchResults = false
-
-  $scope.getLinks = ->
-    ajaxReq = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=extlinks&format=json&ellimit=200&titles=' + $scope.searchQuery + '&callback=JSON_CALLBACK'
-    ajaxReq.success (data) ->
-      $scope.links = data.query.pages[_.first _.keys data.query.pages].extlinks
-
-      # Extra stuff: Get domains
-      domainsList = []
-      parser = document.createElement("a")
-      for link in $scope.links
-        link["*"] = "http:" + link["*"] if /^\/\//i.test(link["*"])
-        parser.href = link["*"]
-        domainsList.push parser.host
-      $scope.domains = _.unique(domainsList)
-
-      $location.path("/links").replace()
-      $scope.divSelected = true
-
-    # $scope.getDomainName = (domain) ->
-    #   console.log domain
-    #   data =
-    #     foo: domain
-    #   $http.get('/links/domain/' + domain)
 
 
   $scope.getCategories = (query) ->
@@ -72,10 +49,45 @@ angular.module('ForeCite')
     ajaxReq = $http.get("/links/search/" + $scope.searchQuery)
     ajaxReq.success (data) ->
       $scope.books = data
-      $scope.getAmazonBooks($scope.searchQuery)
+      # $scope.getAmazonBooks($scope.searchQuery)
 
       $location.path("/books").replace()
       $scope.divSelected = true
+
+  # This is where the scope got all wonky. Investigate what's happening with scope levels here.
+  $scope.returnToLanding = ->
+    ele = angular.element('#search-query')
+    ele.scope().searchQuery = null
+    ele.scope().searchResults = null
+]
+
+app.controller 'LinksCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
+
+  $scope.getLinks = ->
+    ajaxReq = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=extlinks&format=json&ellimit=200&titles=' + $scope.searchQuery + '&callback=JSON_CALLBACK'
+    ajaxReq.success (data) ->
+      $scope.links = data.query.pages[_.first _.keys data.query.pages].extlinks
+
+      # Extra stuff: Get domains
+      domainsList = []
+      parser = document.createElement("a")
+      for link in $scope.links
+        link["*"] = "http:" + link["*"] if /^\/\//i.test(link["*"])
+        parser.href = link["*"]
+        domainsList.push parser.host
+      $scope.domains = _.unique(domainsList)
+
+      $location.path("/links").replace()
+      $scope.divSelected = true
+
+  $scope.init = ->
+    console.log "LinksCtrl works!"
+    $scope.getLinks()
+
+  $scope.init()
+]
+
+app.controller 'BooksCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
 
   $scope.getAmazonBooks = (query) ->
     ajaxReq = $http.get("/links/amazon_search/" + query)
@@ -96,11 +108,8 @@ angular.module('ForeCite')
   $scope.showBookTitle = (title) ->
     $scope.currentBookTitle = title
 
-  # This is where the scope got all wonky. Investigate what's happening with scope levels here.
-  $scope.returnToLanding = ->
-    ele = angular.element('#search-query')
-    ele.scope().searchQuery = null
-    ele.scope().searchResults = null
+  $scope.init = ->
+    $scope.getAmazonBooks($scope.searchQuery)
+
+  $scope.init()
 ]
-
-

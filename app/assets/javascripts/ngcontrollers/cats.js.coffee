@@ -5,12 +5,13 @@ angular.module('ForeCite')
     $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + (query) + '&callback=JSON_CALLBACK'
     .success (data) ->
       $scope.cats = data.query.pages[_.first _.keys data.query.pages].categories
-
-      # Extra stuff: 1) Set searchQuery; 2) Set wiki link; 3) Remove "Category:" string
-      $scope.$parent.searchQuery = query
-      $scope.$parent.wikifiedQuery = "http://en.wikipedia.org/wiki/" + $scope.$parent.searchQuery.split(" ").join("_")
-      element.title = element.title.split(":").pop() for element in $scope.cats
+      $scope.formatData(query)
       $scope.$parent.divSelected = true
+
+  $scope.formatData = (query) ->
+    $scope.$parent.searchQuery = query
+    $scope.$parent.wikifiedQuery = "http://en.wikipedia.org/wiki/" + $scope.$parent.searchQuery.split(" ").join("_")
+    element.title = element.title.split(":").pop() for element in $scope.cats
 
   $scope.getTopics = (category) ->
     $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&list=categorymembers&format=json&cmtitle=' + category + '&cmlimit=400&callback=JSON_CALLBACK'
@@ -18,8 +19,5 @@ angular.module('ForeCite')
       $scope.topics = data.query.categorymembers
       $scope.currentCategory = category.split(":").pop()
 
-  $scope.init = ->
-    $scope.getCategories($scope.searchQuery)
-
-  $scope.init()
+  $scope.getCategories($scope.searchQuery)
 ]

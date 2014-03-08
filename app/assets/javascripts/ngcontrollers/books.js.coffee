@@ -22,10 +22,7 @@ angular.module('ForeCite')
   $scope.showBookTitle = (title) ->
     $scope.currentBookTitle = title
 
-  $scope.init = ->
-    $scope.amazons = null
-    $scope.currentBookTitle = null
-    $scope.getBooks()
-
-  $scope.init()
+  $scope.amazons = null
+  $scope.currentBookTitle = null
+  $scope.getBooks()
 ]

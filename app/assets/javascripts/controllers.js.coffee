@@ -24,5 +24,4 @@ angular.module('ForeCite')
     ele.scope().searchQuery = null
     ele.scope().searchResults = null
 
-  return
 ]

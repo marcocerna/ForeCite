@@ -1,5 +1,5 @@
 angular.module('ForeCite')
-.controller 'BooksCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
+.controller 'BooksCtrl', ['$scope', '$http', ($scope, $http) ->
 
   $scope.getBooks = ->
     # app.divSelected = false

@@ -1,5 +1,5 @@
 angular.module('ForeCite')
-.controller 'LinksCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
+.controller 'LinksCtrl', ['$scope', '$http', ($scope, $http) ->
 
   $scope.getLinks = ->
     ajaxReq = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=extlinks&format=json&ellimit=200&titles=' + $scope.searchQuery + '&callback=JSON_CALLBACK'

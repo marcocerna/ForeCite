@@ -1,5 +1,5 @@
 angular.module('ForeCite')
-.controller 'CatsCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
+.controller 'CatsCtrl', ['$scope', '$http', ($scope, $http) ->
 
   $scope.getCategories = (query) ->
     ajaxReq = $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + (query) + '&callback=JSON_CALLBACK'

@@ -8,8 +8,8 @@ angular.module('ForeCite')
       $scope.searchResults  = true
       $scope.divSelected    = false
       $scope.validQueries   = data
-      $scope.cats = null
-      $scope.topics = null
+      $scope.cats           = null
+      $scope.topics         = null
 
   $scope.executeButton = (query) ->
     $scope.searchQuery = query
@@ -18,10 +18,7 @@ angular.module('ForeCite')
     $location.path("/books").replace()        if $scope.buttonSelected == "books"
     $scope.searchResults = false
 
-  # This is where the scope got all wonky. Investigate what's happening with scope levels here.
   $scope.returnToLanding = ->
-    ele = angular.element('#search-query')
-    ele.scope().searchQuery = null
-    ele.scope().searchResults = null
-
+    $scope.searchQuery    = null
+    $scope.searchResults  = null
 ]

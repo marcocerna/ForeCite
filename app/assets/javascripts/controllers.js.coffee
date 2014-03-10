@@ -13,9 +13,7 @@ angular.module('ForeCite')
 
   $scope.executeButton = (query) ->
     $scope.searchQuery = query
-    $location.path("/links").replace()        if $scope.buttonSelected == "links"
-    $location.path("/categories").replace()   if $scope.buttonSelected == "categories"
-    $location.path("/books").replace()        if $scope.buttonSelected == "books"
+    $location.path("/" + $scope.buttonSelected).replace()
     $scope.searchResults = false
 
   $scope.returnToLanding = ->

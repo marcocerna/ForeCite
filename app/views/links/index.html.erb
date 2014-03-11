@@ -21,7 +21,7 @@
 <div id="searchResults"             class="center-text" ng-if="searchResults">
   <h3 id="what-are-you-looking-for" class="center-text">What are you looking for? (Click one)</h3>
   <ul id="search-results-list"      class='center-text'>
-    <li class="list-search-query"   ng-repeat="query in validQueries" ng-click="executeButton(query)">{{query}}</li>
+    <li class="list-search-query"   ng-repeat="result in searchResults" ng-click="executeButton(result)">{{result}}</li>
   </ul>
 </div>
 

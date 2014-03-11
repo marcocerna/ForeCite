@@ -5,16 +5,15 @@ angular.module('ForeCite')
     $scope.buttonSelected = button
     ajaxReq = $http.get("/links/boss/" + query)
     ajaxReq.success (data) ->
-      $scope.searchResults  = true
+      $scope.searchResults  = data
       $scope.divSelected    = false
-      $scope.validQueries   = data
       $scope.cats           = null
       $scope.topics         = null
 
   $scope.executeButton = (query) ->
     $scope.searchQuery = query
     $location.path("/" + $scope.buttonSelected).replace()
-    $scope.searchResults = false
+    $scope.searchResults = null
 
   $scope.returnToLanding = ->
     $scope.searchQuery    = null

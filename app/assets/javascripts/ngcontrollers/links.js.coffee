@@ -6,7 +6,6 @@ angular.module('ForeCite')
     .success (data) ->
       $scope.links = data.query.pages[_.first _.keys data.query.pages].extlinks
       $scope.getDomains()
-      $scope.$parent.divSelected = true
 
   $scope.getDomains = ->
     domainsList = []

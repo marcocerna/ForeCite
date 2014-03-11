@@ -6,7 +6,6 @@ angular.module('ForeCite')
     .success (data) ->
       $scope.books = data
       $scope.getAmazonBooks($scope.searchQuery)
-      $scope.$parent.divSelected = true
 
   $scope.getAmazonBooks = (query) ->
     $http.get("/links/amazon_search/" + query)

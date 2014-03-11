@@ -6,7 +6,6 @@ angular.module('ForeCite')
     .success (data) ->
       $scope.cats = data.query.pages[_.first _.keys data.query.pages].categories
       $scope.formatData(query)
-      $scope.$parent.divSelected = true
 
   $scope.formatData = (query) ->
     $scope.$parent.searchQuery = query

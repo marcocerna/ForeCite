@@ -13,9 +13,9 @@
 
 <div id="clear-header" style="height: 50px"></div>
 
-<div id="current-search" class="center-text hide-unless-{{searchQuery}}">
+<div id="current-search" class="center-text" ng-if="searchQuery">
   <h2>Currently searching for: {{searchQuery}} </h2>
-  <a id="wiki-link" class="hide-unless-{{wikifiedQuery}}" href="{{wikifiedQuery}}" target="_blank">Wiki Page</a>
+  <a id="wiki-link" ng-if="wikifiedQuery" href="{{wikifiedQuery}}" target="_blank">Wiki Page</a>
 </div>
 
 <div id="searchResults"             class="center-text" ng-if="searchResults">

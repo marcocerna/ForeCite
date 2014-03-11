@@ -1,31 +1,28 @@
 <div ng-controller="AppCtrl">
 
+  <div id="header">
+    <a href="#" ng-click="clearSearch()"><h1 id="forecite-logo">ForeCite</h1></a>
 
-<div id="header">
-  <a href="#" ng-click="clearSearch()"><h1 id="forecite-logo">ForeCite</h1></a>
+    <input  id="search-query" type="text"                   ng-model="searchQuery"                placeholder="Enter Search Query" >
+    <button class="header-button clicked-{{catsSelected}}"  ng-click="getValidQuery(searchQuery, 'categories')">Get Categories</button>
+    <button class="header-button clicked-{{linksSelected}}" ng-click="getValidQuery(searchQuery, 'links')">Get Links</button>
+    <button class="header-button clicked-{{booksSelected}}" ng-click="getValidQuery(searchQuery, 'books')">Get Books</button>
+  </div>
 
-  <input  id="search-query" type="text"                   ng-model="searchQuery"                placeholder="Enter Search Query" >
-  <button class="header-button clicked-{{catsSelected}}"  ng-click="getValidQuery(searchQuery, 'categories')">Get Categories</button>
-  <button class="header-button clicked-{{linksSelected}}" ng-click="getValidQuery(searchQuery, 'links')">Get Links</button>
-  <button class="header-button clicked-{{booksSelected}}" ng-click="getValidQuery(searchQuery, 'books')">Get Books</button>
-</div>
+  <div id="clear-header" style="height: 50px"></div>
 
+  <div id="current-search" class="center-text" ng-if="searchQuery">
+    <h2>Currently searching for: {{searchQuery}} </h2>
+    <a id="wiki-link" ng-if="wikifiedQuery" href="{{wikifiedQuery}}" target="_blank">Wiki Page</a>
+  </div>
 
-<div id="clear-header" style="height: 50px"></div>
+  <div id="searchResults" class="center-text" ng-if="searchResults">
+    <h3 id="looking-for">What are you looking for? (Click one)</h3>
+    <ul id="search-results">
+      <li class="search-result" ng-repeat="result in searchResults" ng-click="executeButton(result)">{{result}}</li>
+    </ul>
+  </div>
 
-<div id="current-search" class="center-text" ng-if="searchQuery">
-  <h2>Currently searching for: {{searchQuery}} </h2>
-  <a id="wiki-link" ng-if="wikifiedQuery" href="{{wikifiedQuery}}" target="_blank">Wiki Page</a>
-</div>
-
-<div id="searchResults"             class="center-text" ng-if="searchResults">
-  <h3 id="what-are-you-looking-for" class="center-text">What are you looking for? (Click one)</h3>
-  <ul id="search-results-list"      class='center-text'>
-    <li class="list-search-query"   ng-repeat="result in searchResults" ng-click="executeButton(result)">{{result}}</li>
-  </ul>
-</div>
-
-
-<div ng-view ng-show="!searchResults"></div>
+  <div ng-view ng-show="!searchResults"></div>
 </div>
 

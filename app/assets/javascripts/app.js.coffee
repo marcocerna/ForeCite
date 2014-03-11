@@ -1,4 +1,4 @@
-angular.module("ForeCite", ['ngRoute','ngResource'])
+angular.module("ForeCite", ['ngRoute'])
 
 .config(['$routeProvider', ($routeProvider) ->
     $routeProvider

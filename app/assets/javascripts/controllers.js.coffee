@@ -1,13 +1,11 @@
 angular.module('ForeCite')
-.controller 'AppCtrl', ['$scope', '$http', '$resource', '$location', ($scope, $http, $resource, $location) ->
+.controller 'AppCtrl', ['$scope', '$http', '$location', ($scope, $http, $location) ->
 
   $scope.getValidQuery = (query, button) ->
     $scope.buttonSelected = button
     $http.get("/links/boss/" + query)
     .success (data) ->
       $scope.searchResults  = data
-      $scope.cats           = null
-      $scope.topics         = null
 
   $scope.executeButton = (query) ->
     $scope.searchResults = null

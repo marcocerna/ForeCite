@@ -8,8 +8,8 @@ angular.module('ForeCite')
       $scope.formatData(query)
 
   $scope.formatData = (query) ->
-    $scope.$parent.searchQuery = query
-    $scope.$parent.wikifiedQuery = "http://en.wikipedia.org/wiki/" + $scope.$parent.searchQuery.split(" ").join("_")
+    $scope.search.query = query
+    $scope.$parent.wikifiedQuery = "http://en.wikipedia.org/wiki/" + $scope.search.query.split(" ").join("_")
     element.title = element.title.split(":").pop() for element in $scope.cats
 
   $scope.getTopics = (category) ->
@@ -18,5 +18,5 @@ angular.module('ForeCite')
       $scope.topics = data.query.categorymembers
       $scope.currentCategory = category.split(":").pop()
 
-  $scope.getCategories($scope.searchQuery)
+  $scope.getCategories($scope.search.query)
 ]

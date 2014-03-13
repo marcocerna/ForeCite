@@ -3,9 +3,10 @@
     <h3 id="domains-header">Domains</h3>
     <ul>
       <a class="domain" href="http://{{currentDomain}}" target="_blank">
-      <li class="list-element" ng-repeat="domain in domains" ng-mouseover="$parent.$parent.currentDomain = domain;getDomainName(domain)">
-        {{domain}}
-      </li></a>
+        <li class="list-element" ng-repeat="domain in domains" ng-mouseover="$parent.$parent.currentDomain = domain">
+          {{domain}}
+        </li>
+      </a>
     </ul>
   </div>
 

@@ -1,10 +1,6 @@
 module AmazonSearch
 
   def amazon_book_search(query)
-    puts "Arrived at the AmazonSearch module!"
-
-
-    puts "Amazon request method has fired"
     # Sets up params hash with ISBN and all the other stuff Amazon needs
     current_time = DateTime.now.utc.strftime("%FT%TZ")
     query = query.split(" ").join("_")
@@ -35,15 +31,8 @@ module AmazonSearch
     # This is the final thing we're gonna need for the API request
     formatted_request = request_url + params.to_query + "&" + signature_hash.to_query.chomp.gsub(/%0A/,'')
 
-
-    puts "Here is the formatted_request: "
-    p formatted_request
-
     # Typhoeus request
     request = Typhoeus.get(formatted_request).body
-    puts "Amazon request method has completed"
-    p request
-
 
     ##############
     # Formatting #

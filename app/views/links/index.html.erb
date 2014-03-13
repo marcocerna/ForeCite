@@ -3,26 +3,26 @@
   <div id="header">
     <a href="#" ng-click="clearSearch()"><h1 id="forecite-logo">ForeCite</h1></a>
 
-    <input  id="search-query" type="text"                   ng-model="searchQuery"                placeholder="Enter Search Query" >
-    <button class="header-button clicked-{{catsSelected}}"  ng-click="getValidQuery(searchQuery, 'categories')">Get Categories</button>
-    <button class="header-button clicked-{{linksSelected}}" ng-click="getValidQuery(searchQuery, 'links')">Get Links</button>
-    <button class="header-button clicked-{{booksSelected}}" ng-click="getValidQuery(searchQuery, 'books')">Get Books</button>
+    <input  id="search-query" type="text"                   ng-model="search.query"                placeholder="Enter Search Query" >
+    <button class="header-button clicked-{{catsSelected}}"  ng-click="getValidQuery(search.query, 'categories')">Get Categories</button>
+    <button class="header-button clicked-{{linksSelected}}" ng-click="getValidQuery(search.query, 'links')">Get Links</button>
+    <button class="header-button clicked-{{booksSelected}}" ng-click="getValidQuery(search.query, 'books')">Get Books</button>
   </div>
 
   <div id="clear-header" style="height: 50px"></div>
 
-  <div id="current-search" class="center-text" ng-if="searchQuery">
-    <h2>Currently searching for: {{searchQuery}} </h2>
+  <div id="current-search" class="center-text" ng-if="search.query">
+    <h2>Currently searching for: {{search.query}} </h2>
     <a id="wiki-link" ng-if="wikifiedQuery" href="{{wikifiedQuery}}" target="_blank">Wiki Page</a>
   </div>
 
-  <div id="searchResults" class="center-text" ng-if="searchResults">
+  <div id="search.results" class="center-text" ng-if="search.results">
     <h3 id="looking-for">What are you looking for? (Click one)</h3>
     <ul id="search-results">
-      <li class="search-result" ng-repeat="result in searchResults" ng-click="executeButton(result)">{{result}}</li>
+      <li class="search-result" ng-repeat="result in search.results" ng-click="executeButton(result)">{{result}}</li>
     </ul>
   </div>
 
-  <div ng-view ng-show="!searchResults"></div>
+  <div ng-view ng-show="!search.results"></div>
 </div>
 

@@ -20,3 +20,15 @@ angular.module("ForeCite", ['ngRoute'])
 
   }
 ]
+
+.factory 'Data', ['$http', ($http) ->
+  return {
+    getBooks: (query) ->
+      return $http.get("/links/search/" + query)
+    getAmazonBooks: (query) ->
+      return $http.get("/links/amazon_search/" + query)
+    getWikiBook: (book) ->
+      isbn = book.split("ISBN")[1].replace("-", "").replace("-", "").replace("-", "").replace(".", "")
+      return $http.get("/links/products/" + isbn)
+  }
+]

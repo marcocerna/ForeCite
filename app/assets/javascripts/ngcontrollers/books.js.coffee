@@ -1,27 +1,22 @@
 angular.module('ForeCite')
-.controller 'BooksCtrl', ['$scope', '$http', ($scope, $http) ->
-
-  $scope.getBooks = ->
-    $http.get("/links/search/" + $scope.search.query)
-    .success (data) ->
-      $scope.books = data
-
-  $scope.getAmazonBooks = ->
-    $http.get("/links/amazon_search/" + $scope.search.query)
-    .success (data) ->
-      $scope.amazons = data
-
-  $scope.getWikiBook = (book) ->
-    isbn = book.split("ISBN")[1].replace("-", "").replace("-", "").replace("-", "").replace(".", "")
-    $http.get("/links/products/" + isbn)
-    .success (data) ->
-      $scope.currentWikiBook = data
-
-  $scope.showBookTitle = (title) ->
-    $scope.currentBookTitle = title
+.controller 'BooksCtrl', ['$scope', '$http', 'Data', ($scope, $http, Data) ->
 
   $scope.amazons = null
   $scope.currentBookTitle = null
-  $scope.getBooks()
-  $scope.getAmazonBooks()
+
+  Data.getBooks($scope.search.query)
+  .then (resp) ->
+    $scope.books = resp.data
+
+  Data.getAmazonBooks($scope.search.query)
+  .then (resp) ->
+    $scope.amazons = resp.data
+
+  $scope.getWikiBook = (book) ->
+    Data.getWikiBook(book)
+    .then (resp) ->
+      $scope.currentWikiBook = resp.data
+
+  $scope.showBookTitle = (title) ->
+    $scope.currentBookTitle = title
 ]

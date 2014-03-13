@@ -5,10 +5,9 @@ angular.module('ForeCite')
     $http.get("/links/search/" + $scope.search.query)
     .success (data) ->
       $scope.books = data
-      $scope.getAmazonBooks($scope.search.query)
 
-  $scope.getAmazonBooks = (query) ->
-    $http.get("/links/amazon_search/" + query)
+  $scope.getAmazonBooks = ->
+    $http.get("/links/amazon_search/" + $scope.search.query)
     .success (data) ->
       $scope.amazons = data
 
@@ -24,4 +23,5 @@ angular.module('ForeCite')
   $scope.amazons = null
   $scope.currentBookTitle = null
   $scope.getBooks()
+  $scope.getAmazonBooks()
 ]

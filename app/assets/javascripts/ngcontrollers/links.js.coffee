@@ -1,11 +1,10 @@
 angular.module('ForeCite')
-.controller 'LinksCtrl', ['$scope', '$http', ($scope, $http) ->
+.controller 'LinksCtrl', ['$scope', '$http', 'Wiki', ($scope, $http, Wiki) ->
 
-  $scope.getLinks = ->
-    $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=extlinks&format=json&ellimit=200&titles=' + $scope.search.query + '&callback=JSON_CALLBACK'
-    .success (data) ->
-      $scope.links = data.query.pages[_.first _.keys data.query.pages].extlinks
-      $scope.getDomains()
+  Wiki.getLinks($scope.search.query)
+  .then (resp) ->
+    $scope.links = resp.data.query.pages[_.first _.keys resp.data.query.pages].extlinks
+    $scope.getDomains()
 
   $scope.getDomains = ->
     domainsList = []
@@ -15,6 +14,4 @@ angular.module('ForeCite')
       parser.href = link["*"]
       domainsList.push parser.host
     $scope.domains = _.unique(domainsList)
-
-  $scope.getLinks()
 ]

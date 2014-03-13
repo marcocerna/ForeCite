@@ -13,7 +13,7 @@
 
   <div id="current-search" class="center-text" ng-if="search.query">
     <h2>Currently searching for: {{search.query}} </h2>
-    <a id="wiki-link" ng-if="wikifiedQuery" href="{{wikifiedQuery}}" target="_blank">Wiki Page</a>
+    <a id="wiki-link" ng-if="search.wiki" href="{{search.wiki}}" target="_blank">Wiki Page</a>
   </div>
 
   <div id="search.results" class="center-text" ng-if="search.results">

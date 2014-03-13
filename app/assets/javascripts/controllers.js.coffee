@@ -3,11 +3,7 @@ angular.module('ForeCite')
 
   $scope.search = {query: "", results: "" }
 
-  $scope.$watch 'search.query', ->
-    console.log($scope.search.query)
-
   $scope.getValidQuery = (query, button) ->
-    $scope.buttonSelected = button
     $http.get("/links/boss/" + query)
     .success (data) ->
       $scope.search.results  = data
@@ -15,7 +11,7 @@ angular.module('ForeCite')
   $scope.executeButton = (query) ->
     $scope.search.results = null
     $scope.search.query = query
-    $location.path("/" + $scope.buttonSelected).replace()
+    $location.path("/" + button).replace()
 
   $scope.clearSearch = ->
     $scope.search.query    = null

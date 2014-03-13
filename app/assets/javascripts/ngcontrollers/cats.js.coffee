@@ -2,14 +2,14 @@ angular.module('ForeCite')
 .controller 'CatsCtrl', ['$scope', '$http', ($scope, $http) ->
 
   $scope.getCategories = (query) ->
-    $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + (query) + '&callback=JSON_CALLBACK'
+    $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + query + '&callback=JSON_CALLBACK'
     .success (data) ->
       $scope.cats = data.query.pages[_.first _.keys data.query.pages].categories
       $scope.formatData(query)
 
   $scope.formatData = (query) ->
     $scope.search.query = query
-    $scope.$parent.wikifiedQuery = "http://en.wikipedia.org/wiki/" + $scope.search.query.split(" ").join("_")
+    $scope.search.wiki = "http://en.wikipedia.org/wiki/" + $scope.search.query.split(" ").join("_")
     element.title = element.title.split(":").pop() for element in $scope.cats
 
   $scope.getTopics = (category) ->

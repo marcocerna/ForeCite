@@ -1,6 +1,5 @@
 angular.module('ForeCite')
-.controller 'BooksCtrl', ['$scope', '$http', 'Data', ($scope, $http, Data) ->
-
+.controller 'BooksCtrl', ['$scope', 'Data', ($scope, Data) ->
   $scope.amazons = null
   $scope.currentBookTitle = null
 

@@ -1,6 +1,5 @@
 angular.module('ForeCite')
-.controller 'LinksCtrl', ['$scope', '$http', 'Wiki', ($scope, $http, Wiki) ->
-
+.controller 'LinksCtrl', ['$scope', 'Wiki', ($scope, Wiki) ->
   Wiki.getLinks($scope.search.query)
   .then (resp) ->
     $scope.links = resp.data.query.pages[_.first _.keys resp.data.query.pages].extlinks

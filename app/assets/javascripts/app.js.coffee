@@ -23,6 +23,8 @@ angular.module("ForeCite", ['ngRoute'])
 
 .factory 'Data', ['$http', ($http) ->
   return {
+    getValidQuery: (query) ->
+      return $http.get("/links/boss/" + query)
     getBooks: (query) ->
       return $http.get("/links/search/" + query)
     getAmazonBooks: (query) ->

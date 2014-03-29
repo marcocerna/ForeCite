@@ -15,7 +15,4 @@ angular.module('ForeCite')
     Data.getWikiBook(book)
     .then (resp) ->
       $scope.currentWikiBook = resp.data
-
-  $scope.showBookTitle = (title) ->
-    $scope.currentBookTitle = title
 ]

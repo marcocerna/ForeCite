@@ -14,3 +14,4 @@ angular.module('ForeCite')
       domainsList.push parser.host
     $scope.domains = _.unique(domainsList)
 ]
+

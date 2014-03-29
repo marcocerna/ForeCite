@@ -1,8 +1,8 @@
 <div>
-  <h3 class="center-text">{{currentBookTitle}}</h3>
+  <h3 class="center-text">{{bookTitle}}</h3>
 
   <div id="books-display">
-    <div class="book-listing temp-book-class" ng-mouseover="showBookTitle(amazon['title'])" ng-repeat="amazon in amazons">
+    <div class="book-listing temp-book-class" ng-mouseover="bookTitle = amazon['title']" ng-repeat="amazon in amazons">
       <a href={{amazon["link"]}} target="_blank"><img class="book-image" src="{{amazon['image']}}"></a>
     </div>
   </div>

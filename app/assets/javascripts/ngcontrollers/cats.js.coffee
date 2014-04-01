@@ -1,6 +1,5 @@
 angular.module('ForeCite')
 .controller 'CatsCtrl', ['$scope', 'Wiki', ($scope, Wiki) ->
-
   $scope.getCategories = (query = $scope.search.query) ->
     Wiki.getCategories(query)
     .then (resp) ->

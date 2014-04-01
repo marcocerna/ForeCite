@@ -209,7 +209,8 @@ button.show-button {
 // Book styles
 
 #books-display {
-  width: 1000px;
+  width: 100%;
+  overflow: none;
   margin-left: auto;
   margin-right: auto;
 }

@@ -2,7 +2,7 @@
   <h3 class="center-text">{{bookTitle}}</h3>
 
   <div id="books-display">
-    <div class="book-listing temp-book-class" ng-mouseover="bookTitle = amazon.title" ng-repeat="amazon in amazons">
+    <div class="book-listing temp-book-class" ng-mouseover="$parent.bookTitle = amazon.title" ng-repeat="amazon in amazons">
       <a href="{{amazon.link}}" target="_blank"><img class="book-image" ng-src="{{amazon.image}}"></a>
     </div>
   </div>
@@ -15,10 +15,10 @@
   </div>
 
   <div id="right">
-    <a href="{{currentWikiBook[0]['link']}}" target="_blank">
+    <a href="{{currentWikiBook.link}}" target="_blank">
       <div class="current-wiki-book book-listing">
-        <h3>{{currentWikiBook[0]['title']}}</h3>
-        <img src="{{currentWikiBook[0]['image']}}">
+        <h3>{{currentWikiBook.title}}</h3>
+        <img src="{{currentWikiBook.image}}">
       </div>
     </a>
   </div>

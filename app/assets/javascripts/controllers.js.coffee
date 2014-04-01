@@ -1,6 +1,9 @@
 angular.module('ForeCite')
 .controller 'AppCtrl', ['$scope', '$location', 'Data', ($scope, $location, Data) ->
+  $location.path("/")
+
   $scope.getValidQuery = (button) ->
+    $location.path("/")
     $scope.button = button
     Data.getValidQuery($scope.search.query)
     .then (resp) ->

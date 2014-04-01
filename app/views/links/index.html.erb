@@ -3,10 +3,10 @@
   <div id="header">
     <a href="#" ng-click="clearSearch()"><h1 id="forecite-logo">ForeCite</h1></a>
 
-    <input  id="search-query" type="text"                   ng-model="search.query"                placeholder="Enter Search Query" >
-    <button class="header-button clicked-{{catsSelected}}"  ng-click="getValidQuery(search.query, 'categories')">Get Categories</button>
-    <button class="header-button clicked-{{linksSelected}}" ng-click="getValidQuery(search.query, 'links')">Get Links</button>
-    <button class="header-button clicked-{{booksSelected}}" ng-click="getValidQuery(search.query, 'books')">Get Books</button>
+    <input id="search-query" type="text" ng-model="search.query" placeholder="Enter Search Query">
+    <button class="clicked-{{button === 'categories'}}" ng-click="getValidQuery('categories')">Get Categories</button>
+    <button class="clicked-{{button === 'links'}}" ng-click="getValidQuery('links')">Get Links</button>
+    <button class="clicked-{{button === 'books'}}" ng-click="getValidQuery('books')">Get Books</button>
   </div>
 
   <div id="clear-header" style="height: 50px"></div>

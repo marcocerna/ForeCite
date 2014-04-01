@@ -22,6 +22,16 @@ body {
 button {
   cursor: pointer;
   border-radius: 1px;
+  font-size: 18px;
+  border: 0px;
+  background-color: #44a0de;
+  color: white;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+button:hover {
+  background-color: #2980b9
 }
 
 a {
@@ -109,21 +119,8 @@ li:hover {
   margin: 10px;
 }
 
-.header-button {
-  font-size: 18px;
-  border: 0px;
-  background-color: #44a0de;
-  color: white;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
-button.header-button:hover {
-  background-color: #2980b9
-}
-
 .clicked-true {
-  background-color: #e67e22;
+  background-color: #c0392b;
 }
 
 // List styles

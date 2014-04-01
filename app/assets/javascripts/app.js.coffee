@@ -14,7 +14,7 @@ angular.module("ForeCite", ['ngRoute'])
     getCategories: (query) ->
       return $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + query + '&callback=JSON_CALLBACK'
     getTopics: (category) ->
-      return $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&list=categorymembers&format=json&cmtitle=' + category + '&cmlimit=400&callback=JSON_CALLBACK'
+      return $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&list=categorymembers&format=json&cmtitle=Category:' + category + '&cmlimit=400&callback=JSON_CALLBACK'
     getLinks: (query) ->
       return $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=extlinks&format=json&ellimit=200&titles=' + query + '&callback=JSON_CALLBACK'
 

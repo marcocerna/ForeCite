@@ -2,7 +2,7 @@
   <div id="left">
     <h3 class="category-header">Categories</h3>
     <ul>
-      <li class="left-list-element list-element" ng-mouseover="getTopics('Category:' + cat['title'])" ng-repeat="cat in cats">
+      <li class="left-list-element list-element" ng-mouseover="getTopics(cat['title'])" ng-repeat="cat in cats">
         {{cat["title"]}}
       </li>
     </ul>

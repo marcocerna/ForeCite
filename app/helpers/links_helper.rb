@@ -3,21 +3,6 @@ require 'open-uri'
 
 module LinksHelper
 
-  def nokoTest
-
-    wikiTest = Nokogiri::HTML(open('http://en.wikipedia.org/wiki/JavaScript'))
-
-    @array_of_stuff = []
-
-    wikiTest.css('ol.references').children.each do |link|
-      @array_of_stuff.push(link)
-    end
-
-    @array_of_stuff
-  end
-
-
-
   def further_reading(query)
 
     # Grab wikipedia page from Heroku

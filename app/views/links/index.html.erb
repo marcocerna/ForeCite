@@ -4,16 +4,16 @@
     <a href="#" ng-click="clearSearch()"><h1 id="forecite-logo">ForeCite</h1></a>
 
     <input id="search-query" type="text" ng-model="search.query" placeholder="Enter Search Query">
-    <button class="clicked-{{button === 'categories'}}" ng-click="getValidQuery('categories')">Get Categories</button>
-    <button class="clicked-{{button === 'links'}}" ng-click="getValidQuery('links')">Get Links</button>
-    <button class="clicked-{{button === 'books'}}" ng-click="getValidQuery('books')">Get Books</button>
+    <button ng-class="{clicked:button === 'categories'}" ng-click="getValidQuery('categories')">Get Categories</button>
+    <button ng-class="{clicked:button === 'links'}" ng-click="getValidQuery('links')">Get Links</button>
+    <button ng-class="{clicked:button === 'books'}" ng-click="getValidQuery('books')">Get Books</button>
   </div>
 
   <div id="clear-header" style="height: 50px"></div>
 
   <div id="current-search" class="center-text" ng-if="search.query">
     <h2>Currently searching for: {{search.query}} </h2>
-    <a id="wiki-link" ng-if="search.wiki" href="{{search.wiki}}" target="_blank">Wiki Page</a>
+    <a id="wiki-link" ng-if="search.wiki" href="http://en.wikipedia.org/wiki/{{search.wiki}}" target="_blank">Wiki Page</a>
   </div>
 
   <div id="search.results" class="center-text" ng-if="search.results">

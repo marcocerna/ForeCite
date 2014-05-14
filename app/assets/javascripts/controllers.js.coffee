@@ -10,10 +10,11 @@ angular.module('ForeCite')
       $scope.search.results = resp.data
 
   $scope.executeButton = (query) ->
-    $scope.search = {query: query}
+    $scope.search = {query: query}          # This clears search results as well
+    $scope.search.wiki = query.split(" ").join("_")
     $location.path("/" + $scope.button)
 
   $scope.clearSearch = ->
     $scope.search = {}
-    $scope.button = ''
+    $scope.button = null
 ]

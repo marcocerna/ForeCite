@@ -4,8 +4,8 @@ angular.module('ForeCite')
     Wiki.getCategories(query)
     .then (resp) ->
       $scope.cats = resp.data.query.pages[_.first _.keys resp.data.query.pages].categories
-      $scope.search.wiki = "http://en.wikipedia.org/wiki/" + $scope.search.query.split(" ").join("_")
-      element.title = element.title.split(":").pop() for element in $scope.cats
+      $scope.search.wiki = $scope.search.query.split(" ").join("_")
+      category.title = category.title.split(":").pop() for category in $scope.cats
 
   $scope.getTopics = (category) ->
     Wiki.getTopics(category)

@@ -1,6 +1,6 @@
 angular.module('ForeCite')
-.controller 'LinksCtrl', ['$scope', 'Wiki', ($scope, Wiki) ->
-  Wiki.getLinks($scope.search.query)
+.controller 'LinksCtrl', ['$scope', 'WikiFactory', ($scope, WikiFactory) ->
+  WikiFactory.getLinks($scope.search.query)
   .then (resp) ->
     $scope.links = resp.data.query.pages[_.first _.keys resp.data.query.pages].extlinks
     $scope.getDomains()

@@ -1,6 +1,6 @@
 angular.module("ForeCite")
 
-.factory 'Wiki', ['$http', ($http) ->
+.factory 'WikiFactory', ['$http', ($http) ->
   return {
     getCategories: (query) ->
       return $http.jsonp 'http://en.wikipedia.org//w/api.php?action=query&prop=categories&format=json&clshow=!hidden&cllimit=100&titles=' + query + '&callback=JSON_CALLBACK'
@@ -12,7 +12,7 @@ angular.module("ForeCite")
   }
 ]
 
-.factory 'Data', ['$http', ($http) ->
+.factory 'DataFactory', ['$http', ($http) ->
   return {
     getValidQuery: (query) ->
       return $http.get "/links/boss/" + query
